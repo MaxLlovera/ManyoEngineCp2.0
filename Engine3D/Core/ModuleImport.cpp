@@ -20,6 +20,11 @@
 #include "Assimp/include/postprocess.h"
 #include "Assimp/include/mesh.h"
 
+#include "DeviL/include/il.h"
+#include "DeviL/include/ilu.h"
+#include "DeviL/include/ilut.h"
+
+
 
 ModuleImport::ModuleImport(Application* app, bool start_enabled) : Module(app, start_enabled) {}
 
@@ -162,6 +167,68 @@ bool ModuleImport::LoadGeometry(const char* path) {
 
 	return true;
 }
+
+//void ModuleImport::Import(const aiMaterial* material, TextureObject* ourTexture)
+//{
+//
+//
+//}
+
+void ModuleImport::Load(std::string path, TextureObject* ourTexture)
+{
+
+	if (App->fileSystem->Exists(path))
+	{
+		//NO CARRGAR
+
+	}
+	else 
+	{
+		//CARGAR
+		Save(path);
+		App->textures->Load(path);
+	}
+
+
+}
+
+bool ModuleImport::Save(std::string path)
+{
+	LOG("Loading texture -> %s", path.c_str());
+	ILuint imageId;
+
+	char* data;
+	uint bytes = App->fileSystem->Load(path.c_str(), &data);
+
+	if (bytes != 0)
+	{
+		if (ilLoadL(IL_TYPE_UNKNOWN, data, bytes))
+		{
+			ILuint size;
+			ILubyte* data;
+			ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);// To pick a specific DXT compression use
+			size = ilSaveL(IL_DDS, nullptr, 0); // Get the size of the data buffer
+			if (size > 0) {
+				data = new ILubyte[size]; // allocate data buffer
+				if (ilSaveL(IL_DDS, data, size) > 0)
+				{
+					App->fileSystem->Save("Library/Test.dds", data, size);
+					return true;
+				}// Save to buffer with the ilSaveIL function
+				RELEASE_ARRAY(data);
+			}
+			delete[] data;
+		}
+		delete[] data;
+	}
+	else
+	{
+		return false;
+	}
+	
+
+}
+
 
 void ModuleImport::FindNodeName(const aiScene* scene, const size_t i, std::string& name)
 {

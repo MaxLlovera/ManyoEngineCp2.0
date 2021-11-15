@@ -5,6 +5,7 @@
 
 class ComponentMesh;
 struct aiScene;
+class TextureObject;
 
 class ModuleImport : public Module
 {
@@ -20,5 +21,8 @@ public:
 
 	void FindNodeName(const aiScene* scene, const size_t i, std::string& name);
 
+	//void Import(const aiMaterial* material, TextureObject* ourTexture);
+	bool Save(std::string path);
+	void Load(std::string path, TextureObject* ourTexture);
 
 };

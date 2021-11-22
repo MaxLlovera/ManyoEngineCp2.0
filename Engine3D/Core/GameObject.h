@@ -11,7 +11,7 @@ class GameObject {
 public:
 
 	GameObject();
-	GameObject(const std::string name);
+	GameObject(const std::string name, const int UUID);
 
 	~GameObject();
 
@@ -21,6 +21,7 @@ public:
 	template<class T> T* CreateComponent()
 	{
 		T* newComponent = new T(this);
+		//int parentUUID = 
 		return newComponent;
 	}
 
@@ -48,6 +49,9 @@ public:
 	std::vector<GameObject*> children;
 	std::vector<Component*> components;
 	
+	uint UUID;
+
+
 	bool active = true;
 	bool isSelected = false;
 

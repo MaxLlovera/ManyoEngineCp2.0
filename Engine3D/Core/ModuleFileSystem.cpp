@@ -27,7 +27,7 @@ ModuleFileSystem::ModuleFileSystem(Application* app, bool start_enabled) : Modul
 	AddPath("./Library/Materials");
 	AddPath("./Library/Meshes");
 	AddPath("./Library/Models");
-
+	AddPath("./Settings");
 }
 
 // Destructor
@@ -137,6 +137,7 @@ void ModuleFileSystem::CreateLibraryDirectories()
 	CreateDir("Library/Materials/");
 	CreateDir("Library/Meshes/");
 	CreateDir("Library/Models/");
+	CreateDir("./Settings");
 }
 
 // Add a new zip file or folder

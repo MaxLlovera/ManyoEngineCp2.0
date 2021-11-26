@@ -9,6 +9,7 @@
 #include "Component.h"
 #include <stack>
 #include <queue>
+#include "Algorithm/Random/LCG.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -19,7 +20,10 @@ bool ModuleScene::Start()
 	LOG("Loading Intro assets");
 	bool ret = true;
 	
-	root = new GameObject("Root");
+	LCG num;
+	int UUID = num.Int();
+
+	root = new GameObject("Root", UUID);
 
 	//Loading house and textures since beginning
 	App->import->LoadGeometry("Assets/Models/BakerHouse.fbx");
@@ -86,7 +90,7 @@ GameObject* ModuleScene::CreateGameObject(GameObject* parent) {
 }
 GameObject* ModuleScene::CreateGameObject(const std::string name, GameObject* parent)
 {
-	GameObject* temp = new GameObject(name);
+	GameObject* temp = new GameObject(name,root->UUID);
 	if (parent)
 		parent->AttachChild(temp);
 	else

@@ -49,7 +49,7 @@ public:
 	std::vector<GameObject*> children;
 	std::vector<Component*> components;
 	
-	uint UUID;
+	int UUID;
 
 
 	bool active = true;

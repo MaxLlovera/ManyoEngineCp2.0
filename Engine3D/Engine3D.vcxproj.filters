@@ -179,6 +179,21 @@
     <ClCompile Include="Core\Application.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Engine\GameObjects - Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ImporterMesh.cpp">
+      <Filter>Engine\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImporterTexture.cpp">
+      <Filter>Engine\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImporterMaterial.cpp">
+      <Filter>Engine\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImporterModel.cpp">
+      <Filter>Engine\Importers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\ImGui\imconfig.h">
@@ -703,6 +718,21 @@
     <ClInclude Include="Core\Application.h">
       <Filter>Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Engine\GameObjects - Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ImporterMesh.h">
+      <Filter>Engine\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImporterTexture.h">
+      <Filter>Engine\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImporterMaterial.h">
+      <Filter>Engine\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImporterModel.h">
+      <Filter>Engine\Importers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">
@@ -758,6 +788,9 @@
     </Filter>
     <Filter Include="Engine\Tools">
       <UniqueIdentifier>{3b33fd60-8311-4ddf-87d9-d36b91d2b082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Importers">
+      <UniqueIdentifier>{7b912166-8b1a-4c60-bbd9-c098f40b054f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

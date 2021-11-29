@@ -102,3 +102,8 @@ void GameObject::PropagateTransform()
 		go->transform->OnParentMoved();
 	}
 }
+
+//void GameObject::GenerateGlobalAABB(GnMesh* mesh)
+//{
+//	oobb = mesh->GetAABB();
+//}

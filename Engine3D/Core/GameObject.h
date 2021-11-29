@@ -2,9 +2,12 @@
 
 #include <vector>
 #include <string>
+#include "Geometry/AABB.h"
+#include "Geometry/OBB.h"
 
 class Component;
 class ComponentTransform;
+class GnMesh;
 
 class GameObject {
 
@@ -42,6 +45,7 @@ public:
 	void AttachChild(GameObject* child);
 	void RemoveChild(GameObject* child);
 	void PropagateTransform();
+	void GenerateGlobalAABB(GnMesh* mesh);
 
 	std::string name;
 	GameObject* parent = nullptr;
@@ -51,6 +55,8 @@ public:
 	
 	int UUID;
 
+	AABB aabb;
+	OBB oobb;
 
 	bool active = true;
 	bool isSelected = false;

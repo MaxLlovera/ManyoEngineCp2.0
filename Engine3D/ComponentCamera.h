@@ -10,16 +10,17 @@
 
 class GameObject;
 
-class Camera: public Component {
+class ComponentCamera: public Component {
 
 public:
 
-	Camera();
-	Camera(GameObject* gameObject);
-	~Camera();
+	ComponentCamera();
+	ComponentCamera(GameObject* gameObject);
+	~ComponentCamera();
 
 	void Update();
-
+	void OnSave();
+	void OnLoad();
 
 public:
 

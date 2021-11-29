@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="ComponentCamera.cpp" />
     <ClCompile Include="Core\Application.cpp" />
     <ClCompile Include="Core\Color.cpp" />
     <ClCompile Include="Core\ComponentMaterial.cpp" />
@@ -78,7 +78,7 @@
     <ClCompile Include="ImporterTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="ComponentCamera.h" />
     <ClInclude Include="Core\Application.h" />
     <ClInclude Include="Core\Assimp\include\ai_assert.h" />
     <ClInclude Include="Core\Assimp\include\anim.h" />

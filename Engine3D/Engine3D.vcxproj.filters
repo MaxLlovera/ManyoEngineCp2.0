@@ -179,9 +179,6 @@
     <ClCompile Include="Core\Application.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Engine\GameObjects - Components</Filter>
-    </ClCompile>
     <ClCompile Include="ImporterMesh.cpp">
       <Filter>Engine\Importers</Filter>
     </ClCompile>
@@ -193,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="ImporterModel.cpp">
       <Filter>Engine\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentCamera.cpp">
+      <Filter>Engine\GameObjects - Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -718,9 +718,6 @@
     <ClInclude Include="Core\Application.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Engine\GameObjects - Components</Filter>
-    </ClInclude>
     <ClInclude Include="ImporterMesh.h">
       <Filter>Engine\Importers</Filter>
     </ClInclude>
@@ -732,6 +729,9 @@
     </ClInclude>
     <ClInclude Include="ImporterModel.h">
       <Filter>Engine\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentCamera.h">
+      <Filter>Engine\GameObjects - Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

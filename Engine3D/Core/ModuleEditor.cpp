@@ -241,10 +241,10 @@ void ModuleEditor::DrawGrid()
 
 void ModuleEditor::About_Window() {
 
-    ImGui::Begin("About 3D Engine", &showAboutWindow);
+    ImGui::Begin("About ManyoEngineCp", &showAboutWindow);
 
     ImGui::Separator();
-    ImGui::Text("3D Engine\n");
+    ImGui::Text("ManyoEngineCp\n");
     ImGui::Separator();
 
     ImGui::Text("3rd Party Libraries used: ");
@@ -484,12 +484,12 @@ void ModuleEditor::UpdateWindowStatus() {
         ImGui::Begin("Hierarchy", &showHierarchyWindow);
 
         //Just cleaning gameObjects(not textures,buffers...)
-        if (ImGui::Button("Clear", { 60,20 })) 
-        {
-            App->editor->gameobjectSelected = nullptr;
-            App->scene->CleanUp(); //Clean GameObjects 
-        }
-        ImGui::SameLine();
+        //if (ImGui::Button("Clear", { 60,20 })) 
+        //{
+        //    App->editor->gameobjectSelected = nullptr;
+        //    App->scene->CleanUp(); //Clean GameObjects 
+        //}
+        //ImGui::SameLine();
         if (ImGui::Button("New", { 60,20 }))
         {
             App->scene->CreateGameObject();

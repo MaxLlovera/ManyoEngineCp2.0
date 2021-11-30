@@ -14,7 +14,8 @@ public:
 
 	void Start();
 	void Stop();
-
+	void Resume();
+	void Reset();
 
 	Uint32 Read();
 	float ReadSec() const;
@@ -24,6 +25,7 @@ private:
 	bool	running;
 	Uint32	started_at;
 	Uint32	stopped_at;
+	Uint32	resumed_at;
 };
 
 #endif //__TIMER_H__

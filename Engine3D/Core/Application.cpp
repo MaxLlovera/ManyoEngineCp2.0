@@ -12,9 +12,8 @@
 #include "ModuleViewportFrameBuffer.h"
 #include "ModuleFileSystem.h"
 #include "ModuleTextures.h"
+#include "ModuleClock.h"
 #include "Globals.h"
-
-
 
 Application::Application()
 {
@@ -29,6 +28,7 @@ Application::Application()
 	import = new ModuleImport(this);
 	fileSystem = new ModuleFileSystem(this);
 	textures = new ModuleTextures(this);
+	clock = new ModuleClock(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -41,7 +41,8 @@ Application::Application()
 	AddModule(input);
 	AddModule(textures);
 	AddModule(import);
-	
+	AddModule(clock);
+
 	// Scenes
 	AddModule(viewportBuffer);
 	AddModule(scene);

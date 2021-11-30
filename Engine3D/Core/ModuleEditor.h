@@ -61,6 +61,7 @@ public:
 	bool showGameWindow;
 	bool showTextures;
 	bool showConsoleWindow;
+	bool showTimer;
 
 	ImGuiTextBuffer consoleText;
 

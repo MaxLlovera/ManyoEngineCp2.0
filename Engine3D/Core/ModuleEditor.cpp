@@ -11,6 +11,7 @@
 #include "ModuleViewportFrameBuffer.h"
 #include "ModuleCamera3D.h"
 #include "ModuleTextures.h"
+#include "ModuleClock.h"
 #include "ComponentMaterial.h"
 #include "ComponentMesh.h"
 
@@ -50,7 +51,8 @@ ModuleEditor::~ModuleEditor()
 {
 }
 
-bool ModuleEditor::Init() {
+bool ModuleEditor::Init() 
+{
     bool ret = true;
 
     return ret;
@@ -393,6 +395,8 @@ void ModuleEditor::MenuBar() {
                 showConsoleWindow = !showConsoleWindow;
             if (ImGui::MenuItem("Textures")) 
                 showTextures = !showTextures;
+			if (ImGui::MenuItem("Timer"))
+				showTimer = !showTimer;
 
             ImGui::Separator();
             if (ImGui::MenuItem("Configuration")) 
@@ -455,7 +459,47 @@ void ModuleEditor::UpdateWindowStatus() {
         }
         ImGui::End();
     }
-        
+    
+	if (showTimer)
+	{
+		ImGui::Begin("Timer", &showTimer);
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, { 1,0,0,1 });
+		if (ImGui::Button("Play", { 60,20 }))
+		{
+			if (App->clock->CheckPause())
+			{
+				App->clock->Resume();
+			}
+			else
+			{
+				App->clock->Play();
+			}
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Pause", { 60,20 }))
+		{
+			if (!App->clock->CheckPause())
+			{
+				App->clock->Pause();
+			}
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("Stop", { 60,20 }))
+		{
+			App->clock->Stop();
+		}
+		ImGui::PopStyleColor();
+
+
+		ImGui::SliderFloat("Speed UP/DOWN", App->clock->GetScale(), 0.1f, 2.0f, "%.1f");
+		ImGui::Text("Real Time: %.1f", App->clock->GetRealTimeSeconds());
+		ImGui::Text("Game Time: %.1f", App->clock->GetSecondsSinceGameStart());
+		ImGui::Text("Delta Time: %.3f", App->clock->GetDeltaTimeGame());
+
+		ImGui::End();
+
+	}
+
     //Console
     if (showConsoleWindow) {
 

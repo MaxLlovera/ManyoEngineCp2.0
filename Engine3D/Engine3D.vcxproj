@@ -21,6 +21,7 @@
     <ClCompile Include="Core\ImporterMesh.cpp" />
     <ClCompile Include="Core\ImporterModel.cpp" />
     <ClCompile Include="Core\ImporterTexture.cpp" />
+    <ClCompile Include="Core\ModuleClock.cpp" />
     <ClCompile Include="Core\ModuleFileSystem.cpp" />
     <ClCompile Include="Core\ImGui\imgui.cpp" />
     <ClCompile Include="Core\ImGui\imgui_demo.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="Core\ImporterMesh.h" />
     <ClInclude Include="Core\ImporterModel.h" />
     <ClInclude Include="Core\ImporterTexture.h" />
+    <ClInclude Include="Core\ModuleClock.h" />
     <ClInclude Include="Core\ModuleFileSystem.h" />
     <ClInclude Include="Core\Globals.h" />
     <ClInclude Include="Core\ImGui\imconfig.h" />

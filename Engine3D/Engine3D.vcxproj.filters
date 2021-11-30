@@ -179,19 +179,19 @@
     <ClCompile Include="Core\Application.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="ImporterMesh.cpp">
+    <ClCompile Include="Core\ImporterMaterial.cpp">
       <Filter>Engine\Importers</Filter>
     </ClCompile>
-    <ClCompile Include="ImporterTexture.cpp">
+    <ClCompile Include="Core\ImporterMesh.cpp">
       <Filter>Engine\Importers</Filter>
     </ClCompile>
-    <ClCompile Include="ImporterMaterial.cpp">
+    <ClCompile Include="Core\ImporterModel.cpp">
       <Filter>Engine\Importers</Filter>
     </ClCompile>
-    <ClCompile Include="ImporterModel.cpp">
+    <ClCompile Include="Core\ImporterTexture.cpp">
       <Filter>Engine\Importers</Filter>
     </ClCompile>
-    <ClCompile Include="ComponentCamera.cpp">
+    <ClCompile Include="Core\ComponentCamera.cpp">
       <Filter>Engine\GameObjects - Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -718,19 +718,19 @@
     <ClInclude Include="Core\Application.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="ImporterMesh.h">
+    <ClInclude Include="Core\ImporterMaterial.h">
       <Filter>Engine\Importers</Filter>
     </ClInclude>
-    <ClInclude Include="ImporterTexture.h">
+    <ClInclude Include="Core\ImporterMesh.h">
       <Filter>Engine\Importers</Filter>
     </ClInclude>
-    <ClInclude Include="ImporterMaterial.h">
+    <ClInclude Include="Core\ImporterModel.h">
       <Filter>Engine\Importers</Filter>
     </ClInclude>
-    <ClInclude Include="ImporterModel.h">
+    <ClInclude Include="Core\ImporterTexture.h">
       <Filter>Engine\Importers</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentCamera.h">
+    <ClInclude Include="Core\ComponentCamera.h">
       <Filter>Engine\GameObjects - Components</Filter>
     </ClInclude>
   </ItemGroup>

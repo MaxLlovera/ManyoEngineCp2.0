@@ -33,6 +33,11 @@ update_status ModuleClock::PreUpdate(float dt)
 	if (is_paused)
 	{
 		dtGame = dt * scale;
+		//gameTimer = gameTimer + dtGame;
+		
+	}
+	else {
+		dtGame = dt * scale;
 		gameTimer = gameTimer + dtGame;
 	}
 

@@ -470,10 +470,10 @@ void ModuleEditor::UpdateWindowStatus() {
 			{
 				App->clock->Resume();
 			}
-			else
-			{
-				App->clock->Play();
-			}
+			//else
+			//{
+			//	App->clock->Play();
+			//}
 		}
 		ImGui::SameLine();
 		if (ImGui::Button("Pause", { 60,20 }))

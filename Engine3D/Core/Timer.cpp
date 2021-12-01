@@ -47,7 +47,7 @@ void Timer::Resume()
 {
 	running = true;
 	resumed_at = SDL_GetTicks();
-	started_at = started_at + (resumed_at - stopped_at);
+	//started_at = started_at + (resumed_at - stopped_at);
 	resumed_at = 0;
 	stopped_at = 0;
 

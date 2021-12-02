@@ -397,6 +397,8 @@ void ModuleEditor::MenuBar() {
                 showTextures = !showTextures;
 			if (ImGui::MenuItem("Timer"))
 				showTimer = !showTimer;
+            if (ImGui::MenuItem("Explorer"))
+                showExplorer = !showExplorer;
 
             ImGui::Separator();
             if (ImGui::MenuItem("Configuration")) 
@@ -516,6 +518,16 @@ void ModuleEditor::UpdateWindowStatus() {
         //Only shows info if any gameobject selected
         if (gameobjectSelected != nullptr) 
             InspectorGameObject(); 
+
+        ImGui::End();
+
+    }
+
+    //Explorer
+    if (showExplorer) {
+
+        ImGui::Begin("Explorer", &showExplorer);
+      
 
         ImGui::End();
 

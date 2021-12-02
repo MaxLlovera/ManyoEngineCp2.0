@@ -527,13 +527,45 @@ void ModuleEditor::UpdateWindowStatus() {
 
         ImGui::Begin("Hierarchy", &showHierarchyWindow);
 
+        if (App->input->GetKey(SDL_SCANCODE_DELETE) == KEY_UP)
+        {
+            if (App->editor->gameobjectSelected != nullptr)
+            {
+                LOG("Deleted gameobject %s", App->editor->gameobjectSelected->name.c_str());
+
+                for (int i = 0; i < App->scene->root->children.size(); i++)
+                {
+                    if (App->scene->root->children.at(i) == App->editor->gameobjectSelected)
+                    {
+                        std::vector<GameObject*> lenght;
+                        for (int i = 0; i < App->scene->root->children.size(); i++)
+                        {
+                            if (App->scene->root->children.at(i) != App->editor->gameobjectSelected)
+                            {
+                                lenght.push_back(App->scene->root->children.at(i));
+                            }
+                        }
+                        App->editor->gameobjectSelected = nullptr;
+                        App->scene->root->children.clear();
+                        for (int i = 0; i < lenght.size(); i++)
+                        {
+                            App->scene->root->children.push_back(lenght.at(i));
+                        }
+                    }
+                }
+
+            }
+
+
+
+        }
         //Just cleaning gameObjects(not textures,buffers...)
-        //if (ImGui::Button("Clear", { 60,20 })) 
-        //{
-        //    App->editor->gameobjectSelected = nullptr;
-        //    App->scene->CleanUp(); //Clean GameObjects 
-        //}
-        //ImGui::SameLine();
+        if (ImGui::Button("Clear", { 60,20 })) 
+        {
+            App->editor->gameobjectSelected = nullptr;
+           App->scene->CleanUp(); //Clean GameObjects 
+        }
+        ImGui::SameLine();
         if (ImGui::Button("New", { 60,20 }))
         {
             App->scene->CreateGameObject();

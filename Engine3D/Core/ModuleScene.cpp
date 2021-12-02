@@ -57,7 +57,7 @@ bool ModuleScene::CleanUp()
 		delete go;
 	}
 
-	delete root;
+	//delete root;
 
 	return true;
 }

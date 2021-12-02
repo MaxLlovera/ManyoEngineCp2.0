@@ -109,7 +109,13 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 							materialComp->SetTexture(textureObject);
 						}
 					}
+
 				}
+				else
+				{
+					newGameObject->CreateComponent<ComponentMaterial>();
+				}
+
 			}
 
 			mesh->numVertices = assimpMesh->mNumVertices;

@@ -9,6 +9,7 @@
 
 ComponentCamera::ComponentCamera(GameObject* parent) : Component(parent)
 {
+	frustrum.type = FrustumType::PerspectiveFrustum;
 
 }
 

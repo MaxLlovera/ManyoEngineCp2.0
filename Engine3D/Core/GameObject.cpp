@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleScene.h"
 #include "ModuleFileSystem.h"
+#include "ComponentMesh.h"
 #include "ComponentTransform.h"
 #include "ImGui/imgui.h"
 #include "Algorithm/Random/LCG.h"
@@ -103,7 +104,13 @@ void GameObject::PropagateTransform()
 	}
 }
 
-//void GameObject::GenerateGlobalAABB(GnMesh* mesh)
-//{
-//	oobb = mesh->GetAABB();
-//}
+void GameObject::GenerateGlobalAABB(ComponentMesh* mesh)
+{
+	// Generate global OBB
+	oobb = mesh->localAABB;
+	oobb.Transform(transform->transformMatrix);	// Generate global AABB
+	aabb.SetNegativeInfinity();
+	aabb.Enclose(oobb);
+
+
+}

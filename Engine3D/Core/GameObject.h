@@ -7,7 +7,7 @@
 
 class Component;
 class ComponentTransform;
-class GnMesh;
+class ComponentMesh;
 
 class GameObject {
 
@@ -45,7 +45,7 @@ public:
 	void AttachChild(GameObject* child);
 	void RemoveChild(GameObject* child);
 	void PropagateTransform();
-	void GenerateGlobalAABB(GnMesh* mesh);
+	void GenerateGlobalAABB(ComponentMesh* mesh);
 
 	std::string name;
 	GameObject* parent = nullptr;

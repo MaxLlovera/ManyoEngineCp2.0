@@ -125,7 +125,12 @@ void ComponentMesh::GenerateBounds()
 
 	radius = sphere.r;
 	centerPoint = sphere.pos;
+
+
+
 }
+
+
 
 void ComponentMesh::DrawNormals() const
 {

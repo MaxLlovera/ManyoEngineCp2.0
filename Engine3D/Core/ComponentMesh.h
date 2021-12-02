@@ -55,7 +55,7 @@ public:
 	bool drawFaceNormals = false;
 	float normalScale = 1.f;
 	
-private:
+public:
 
 	//Bounding sphere
 	float3 centerPoint = float3::zero;

@@ -48,11 +48,10 @@ update_status ModuleImport::Update(float dt) {
 	return UPDATE_CONTINUE;
 }
 
-bool ModuleImport::LoadGeometry(const char* path) {
 
+bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, const char* textureLoadedPath)
+{
 	//-- Own structure	
-	GameObject* root = nullptr;
-	std::string new_root_name(path);
 
 	//-- Assimp stuff
 	aiMesh* assimpMesh = nullptr;
@@ -79,29 +78,29 @@ bool ModuleImport::LoadGeometry(const char* path) {
 	if (scene != nullptr && scene->HasMeshes()) {
 		//Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (size_t i = 0; i < scene->mNumMeshes; i++)
-		{		
+		{
 			bool nameFound = false;
 			std::string name;
 			FindNodeName(scene, i, name);
 
-			GameObject* newGameObject = App->scene->CreateGameObject(name);
+
 			ComponentMesh* mesh = newGameObject->CreateComponent<ComponentMesh>();
 			assimpMesh = scene->mMeshes[i];
-			
+
 			if (scene->HasMaterials()) {
 				texture = scene->mMaterials[assimpMesh->mMaterialIndex];
 
 				if (texture != nullptr) {
 					aiGetMaterialTexture(texture, aiTextureType_DIFFUSE, assimpMesh->mMaterialIndex, &texturePath);
-					std::string new_path(texturePath.C_Str());
-					if (new_path.size() > 0) {
-						mesh->texturePath = "Assets/Textures/" + new_path;
+					/*std::string new_path(textureLoadedPath);*/
+					if (textureLoadedPath != nullptr) {
+						mesh->texturePath = textureLoadedPath;
 						if (!App->textures->Find(mesh->texturePath))
 						{
-							const TextureObject& textureObject = App->textures->Load(mesh->texturePath);							
+							const TextureObject& textureObject = App->textures->Load(mesh->texturePath);
 							ComponentMaterial* materialComp = newGameObject->CreateComponent<ComponentMaterial>();
 							materialComp->SetTexture(textureObject);
-							
+
 						}
 						else
 						{
@@ -112,10 +111,10 @@ bool ModuleImport::LoadGeometry(const char* path) {
 					}
 				}
 			}
-	
+
 			mesh->numVertices = assimpMesh->mNumVertices;
 			mesh->vertices.resize(assimpMesh->mNumVertices);
-			
+
 			memcpy(&mesh->vertices[0], assimpMesh->mVertices, sizeof(float3) * assimpMesh->mNumVertices);
 			LOG("New mesh with %d vertices", assimpMesh->mNumVertices);
 
@@ -134,14 +133,14 @@ bool ModuleImport::LoadGeometry(const char* path) {
 					}
 				}
 			}
-			
+
 			// -- Copying Normals info --//
 			if (assimpMesh->HasNormals()) {
 
 				mesh->normals.resize(assimpMesh->mNumVertices);
 				memcpy(&mesh->normals[0], assimpMesh->mNormals, sizeof(float3) * assimpMesh->mNumVertices);
 			}
-			
+
 			// -- Copying UV info --//
 			if (assimpMesh->HasTextureCoords(0))
 			{
@@ -151,16 +150,16 @@ bool ModuleImport::LoadGeometry(const char* path) {
 					memcpy(&mesh->texCoords[j], &assimpMesh->mTextureCoords[0][j], sizeof(float2));
 				}
 			}
-			
+
 			mesh->GenerateBuffers();
 			mesh->GenerateBounds();
 			mesh->ComputeNormals();
 		}
-		aiReleaseImport(scene);		
+		aiReleaseImport(scene);
 		RELEASE_ARRAY(buffer);
 
 	}
-	else 
+	else
 		LOG("Error loading scene %s", path);
 
 	RELEASE_ARRAY(buffer);
@@ -182,7 +181,7 @@ void ModuleImport::Load(std::string path, TextureObject* ourTexture)
 		//NO CARRGAR
 
 	}
-	else 
+	else
 	{
 		//CARGAR
 		Save(path);
@@ -225,7 +224,7 @@ bool ModuleImport::Save(std::string path)
 	{
 		return false;
 	}
-	
+
 
 }
 

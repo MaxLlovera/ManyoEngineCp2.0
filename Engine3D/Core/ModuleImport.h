@@ -1,5 +1,6 @@
 #pragma once
 #include "Module.h"
+#include "ComponentTransform.h"
 
 #include <string>
 
@@ -10,14 +11,14 @@ class TextureObject;
 class ModuleImport : public Module
 {
 public:
-	
+
 	ModuleImport(Application* app, bool start_enabled = true);
 
 	bool Init() override;
 	update_status Update(float dt) override;
 	bool CleanUp() override;
 
-	bool LoadGeometry(const char* path);
+	bool LoadGeometry(const char* path, GameObject* newGameObject, const char* textureLoadedPath = nullptr);
 
 	void FindNodeName(const aiScene* scene, const size_t i, std::string& name);
 

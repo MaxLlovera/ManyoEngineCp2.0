@@ -9,7 +9,7 @@
 #include "ModuleFileSystem.h"
 #include "ComponentMaterial.h"
 #include "ImGui/imgui_impl_sdl.h"
-
+#include "ModuleScene.h"
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -32,7 +32,7 @@ bool ModuleInput::Init()
 	bool ret = true;
 	SDL_Init(0);
 
-	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
+	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
@@ -47,19 +47,19 @@ update_status ModuleInput::PreUpdate(float dt)
 	SDL_PumpEvents();
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
-	
-	for(int i = 0; i < MAX_KEYS; ++i)
+
+	for (int i = 0; i < MAX_KEYS; ++i)
 	{
-		if(keys[i] == 1)
+		if (keys[i] == 1)
 		{
-			if(keyboard[i] == KEY_IDLE)
+			if (keyboard[i] == KEY_IDLE)
 				keyboard[i] = KEY_DOWN;
 			else
 				keyboard[i] = KEY_REPEAT;
 		}
 		else
 		{
-			if(keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
+			if (keyboard[i] == KEY_REPEAT || keyboard[i] == KEY_DOWN)
 				keyboard[i] = KEY_UP;
 			else
 				keyboard[i] = KEY_IDLE;
@@ -72,18 +72,18 @@ update_status ModuleInput::PreUpdate(float dt)
 	mouse_y /= SCREEN_SIZE;
 	mouse_z = 0;
 
-	for(int i = 0; i < 5; ++i)
+	for (int i = 0; i < 5; ++i)
 	{
-		if(buttons & SDL_BUTTON(i))
+		if (buttons & SDL_BUTTON(i))
 		{
-			if(mouse_buttons[i] == KEY_IDLE)
+			if (mouse_buttons[i] == KEY_IDLE)
 				mouse_buttons[i] = KEY_DOWN;
 			else
 				mouse_buttons[i] = KEY_REPEAT;
 		}
 		else
 		{
-			if(mouse_buttons[i] == KEY_REPEAT || mouse_buttons[i] == KEY_DOWN)
+			if (mouse_buttons[i] == KEY_REPEAT || mouse_buttons[i] == KEY_DOWN)
 				mouse_buttons[i] = KEY_UP;
 			else
 				mouse_buttons[i] = KEY_IDLE;
@@ -94,84 +94,85 @@ update_status ModuleInput::PreUpdate(float dt)
 
 	bool quit = false;
 	SDL_Event event;
-	while(SDL_PollEvent(&event))
+	while (SDL_PollEvent(&event))
 	{
 		ImGui_ImplSDL2_ProcessEvent(&event);
-		switch(event.type)
+		switch (event.type)
 		{
-			case SDL_MOUSEWHEEL:
-				mouse_z = event.wheel.y;
+		case SDL_MOUSEWHEEL:
+			mouse_z = event.wheel.y;
 			break;
 
-			case SDL_MOUSEMOTION:
-				mouse_x = event.motion.x / SCREEN_SIZE;
-				mouse_y = event.motion.y / SCREEN_SIZE;
+		case SDL_MOUSEMOTION:
+			mouse_x = event.motion.x / SCREEN_SIZE;
+			mouse_y = event.motion.y / SCREEN_SIZE;
 
-				mouse_x_motion = event.motion.xrel / SCREEN_SIZE;
-				mouse_y_motion = event.motion.yrel / SCREEN_SIZE;
+			mouse_x_motion = event.motion.xrel / SCREEN_SIZE;
+			mouse_y_motion = event.motion.yrel / SCREEN_SIZE;
 			break;
 
-			case SDL_QUIT:
+		case SDL_QUIT:
 			quit = true;
 			break;
 
-			case SDL_WINDOWEVENT:
+		case SDL_WINDOWEVENT:
+		{
+			if (event.window.event == SDL_WINDOWEVENT_RESIZED)
+				App->renderer3D->OnResize(event.window.data1, event.window.data2);
+
+			if (event.window.event == SDL_WINDOWEVENT_CLOSE)   // exit game
+				App->closeEngine = true;
+
+			break;
+		}
+		break;
+
+		case SDL_DROPFILE:
+		{
+			filePath = event.drop.file;
+			std::string fileName(filePath);
+			if (fileName.substr(fileName.find_last_of(".")) == ".fbx" || fileName.substr(fileName.find_last_of(".")) == ".FBX" || fileName.substr(fileName.find_last_of(".")) == ".OBJ" || fileName.substr(fileName.find_last_of(".")) == ".obj")
 			{
-				if (event.window.event == SDL_WINDOWEVENT_RESIZED)
-					App->renderer3D->OnResize(event.window.data1, event.window.data2);
-
-				if (event.window.event == SDL_WINDOWEVENT_CLOSE)   // exit game
-					App->closeEngine = true;
-
-				break;
+				LOG("Path of file dropped will be %s", filePath);
+				GameObject* newGameObject = App->scene->CreateGameObject(filePath);
+				App->import->LoadGeometry(filePath, newGameObject);
 			}
-			break;
-
-			case SDL_DROPFILE:
+			else if (fileName.substr(fileName.find_last_of(".")) == ".jpg" || fileName.substr(fileName.find_last_of(".")) == ".png" || fileName.substr(fileName.find_last_of(".")) == ".PNG" || fileName.substr(fileName.find_last_of(".")) == ".JPG")
 			{
-				filePath = event.drop.file;
-				std::string fileName(filePath);
-				if (fileName.substr(fileName.find_last_of(".")) == ".fbx" || fileName.substr(fileName.find_last_of(".")) == ".FBX" || fileName.substr(fileName.find_last_of(".")) == ".OBJ" || fileName.substr(fileName.find_last_of(".")) == ".obj")
+				LOG("Path of file dropped will be %s", filePath);
+				std::string realFileName = fileName.substr(fileName.find_last_of("\\") + 1);
+				if (App->textures->Find(realFileName))
 				{
-					LOG("Path of file dropped will be %s", filePath);
-					App->import->LoadGeometry(filePath);
-				}
-				else if (fileName.substr(fileName.find_last_of(".")) == ".jpg" || fileName.substr(fileName.find_last_of(".")) == ".png" || fileName.substr(fileName.find_last_of(".")) == ".PNG" || fileName.substr(fileName.find_last_of(".")) == ".JPG")
-				{
-					LOG("Path of file dropped will be %s", filePath);
-					std::string realFileName = fileName.substr(fileName.find_last_of("\\") + 1); 					
-					if (App->textures->Find(realFileName))
+					TextureObject texture = App->textures->Get(realFileName);
+					if (App->editor->gameobjectSelected)
 					{
-						TextureObject texture = App->textures->Get(realFileName);
-						if (App->editor->gameobjectSelected)
+						if (ComponentMaterial* material = App->editor->gameobjectSelected->GetComponent<ComponentMaterial>())
 						{
-							if (ComponentMaterial* material = App->editor->gameobjectSelected->GetComponent<ComponentMaterial>())
-							{
-								material->SetTexture(texture);
-							}
-
+							material->SetTexture(texture);
 						}
-					}
-					else
-					{
-						TextureObject texture = App->textures->Load(realFileName);
-						if (App->editor->gameobjectSelected)
-						{
-							if (ComponentMaterial* material = App->editor->gameobjectSelected->GetComponent<ComponentMaterial>())
-							{
-								material->SetTexture(texture);
-							}
 
-						}
 					}
 				}
-			};
-			SDL_free(&filePath);
-			break;
+				else
+				{
+					TextureObject texture = App->textures->Load(realFileName);
+					if (App->editor->gameobjectSelected)
+					{
+						if (ComponentMaterial* material = App->editor->gameobjectSelected->GetComponent<ComponentMaterial>())
+						{
+							material->SetTexture(texture);
+						}
+
+					}
+				}
+			}
+		};
+		SDL_free(&filePath);
+		break;
 		}
 	}
 
-	if(quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
+	if (quit == true || keyboard[SDL_SCANCODE_ESCAPE] == KEY_UP)
 		return UPDATE_STOP;
 
 	return UPDATE_CONTINUE;
@@ -185,7 +186,7 @@ bool ModuleInput::CleanUp()
 	return true;
 }
 
-void ModuleInput::OnGui() {	
+void ModuleInput::OnGui() {
 	if (ImGui::CollapsingHeader("Input"))
 	{
 		ImGui::Text("Mouse Position");

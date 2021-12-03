@@ -147,12 +147,16 @@ void ModuleScene::loadJSON()
 			for (const auto& currentGameObjectJson : document["Game Objects"].GetArray())
 			{
 				const std::string name = currentGameObjectJson["Name"].GetString();
+				const bool isRootGO = isRoot(name);
 				const int parentUUID = currentGameObjectJson["ParentUID"].GetInt();
 				const int UUID = currentGameObjectJson["UID"].GetInt();
 
 				GameObject* parent = getParent(root->children, parentUUID);
 				GameObject* gameObject = CreateGameObject(name, parent);
+
 				gameObject->UUID = UUID;
+
+				if (isRootGO) root = gameObject;
 
 				float3 pos;
 				pos.x = currentGameObjectJson["Translation"].GetArray()[0].GetFloat();
@@ -209,8 +213,15 @@ GameObject* ModuleScene::getParent(const std::vector<GameObject*> children, cons
 			return children[i];
 		}
 
-		if (children[i]->children.size() > 0) getParent(children[i]->children, parentUUID);
+		if (children[i]->children.size() > 0) return getParent(children[i]->children, parentUUID);
 	}
 
 	return nullptr;
+}
+
+bool ModuleScene::isRoot(std::string name)
+{
+	for (auto& c : name) c = tolower(c);
+
+	return name.find("root") != std::string::npos;
 }

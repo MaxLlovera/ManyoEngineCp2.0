@@ -26,8 +26,10 @@ public:
 	GameObject* CreateGameObject(GameObject* parent = nullptr);
 	GameObject* CreateGameObject(const std::string name, GameObject* parent = nullptr);
 
+	// LOAD JSON
 	void loadJSON();
 	GameObject* getParent(const std::vector<GameObject*> children, const int parentUUID);
+	bool isRoot(std::string name);
 
 	GameObject* root;
 };

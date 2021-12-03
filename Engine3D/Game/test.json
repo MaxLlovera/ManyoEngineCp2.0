@@ -28,7 +28,7 @@
         "UID": 1336602388,
         "ParentUID":1336602188,
         "Name":"HaloHelmet",
-        "Translation":[4,0,0],
+        "Translation":[2,0,0],
         "Scale":[1,1,1],
         "Rotation":[-0.707107,0,0,0.707107],
         "Components":[{
@@ -39,7 +39,22 @@
             "Type": 1,
             "Path": "Assets/Textures/haloHelmet_diffuse.png"
         }]
+    },
+    {
+        "UID": 1336602321,
+        "ParentUID":1336602388,
+        "Name":"Cart",
+        "Translation":[4,0,0],
+        "Scale":[1,1,1],
+        "Rotation":[-0.707107,0,0,0.707107],
+        "Components":[{
+            "Type": 0,
+            "Path": "Assets/Models/cart.fbx"
+        },
+        {
+            "Type": 1,
+            "Path": "Assets/Textures/haloHelmet_diffuse.png"
+        }]
     }
 ]
 }
-    

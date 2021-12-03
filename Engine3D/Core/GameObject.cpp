@@ -1,5 +1,7 @@
 #include "GameObject.h"
 #include "Application.h"
+#include "glew.h"
+#include "SDL/include/SDL_opengl.h"
 #include "ModuleScene.h"
 #include "ModuleFileSystem.h"
 #include "ComponentMesh.h"
@@ -108,9 +110,29 @@ void GameObject::GenerateGlobalAABB(ComponentMesh* mesh)
 {
 	// Generate global OBB
 	oobb = mesh->localAABB;
-	oobb.Transform(transform->transformMatrix);	// Generate global AABB
+	oobb.Transform(transform->transformMatrix);
+
+	// Generate global AABB
 	aabb.SetNegativeInfinity();
 	aabb.Enclose(oobb);
 
+	DrawAABB();
+}
 
+void GameObject::DrawAABB()
+{
+	float3 cornerPoints[8];
+	int points[24] = {0,2, 2,6, 6,4, 4,0, 0,1, 1,3, 3,2, 3,7, 7,5, 5,1, 6,7, 5,4};
+
+
+	aabb.GetCornerPoints(cornerPoints);
+
+	glBegin(GL_LINES);
+
+	for (int i = 0; i < 24; ++i)
+	{
+		glVertex3fv(&cornerPoints[points[i]].x);
+	}
+
+	glEnd();
 }

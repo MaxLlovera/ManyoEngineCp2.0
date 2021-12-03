@@ -14,6 +14,7 @@
 #include "ModuleClock.h"
 #include "ComponentMaterial.h"
 #include "ComponentMesh.h"
+#include "ComponentTransform.h"
 
 //Tools
 

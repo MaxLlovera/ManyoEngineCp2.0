@@ -143,7 +143,7 @@ void ModuleScene::loadJSON()
 		}
 		else
 		{
-
+			int originalRootUUID = root->UUID;
 			for (const auto& currentGameObjectJson : document["Game Objects"].GetArray())
 			{
 				const std::string name = currentGameObjectJson["Name"].GetString();
@@ -156,7 +156,7 @@ void ModuleScene::loadJSON()
 
 				gameObject->UUID = UUID;
 
-				if (isRootGO) root = gameObject;
+				if (isRootGO && originalRootUUID == root->UUID) root = gameObject;
 
 				float3 pos;
 				pos.x = currentGameObjectJson["Translation"].GetArray()[0].GetFloat();

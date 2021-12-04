@@ -4,6 +4,7 @@
 #include "Application.h"
 #include "ModuleEditor.h"
 #include "ModuleWindow.h"
+#include "ModuleFileSystem.h"
 #include "ModuleRenderer3D.h"
 #include "ModuleInput.h"
 #include "ModuleImport.h"
@@ -455,6 +456,8 @@ void ModuleEditor::UpdateWindowStatus() {
                     ComponentMaterial* material = gameobjectSelected->GetComponent<ComponentMaterial>();
                     if (material)
                     {
+                        std::string normPathShortTexture = "Assets/Textures/" + App->fileSystem->SetNormalName(t.second.name.c_str());
+                        material->texturePath = normPathShortTexture;
                         material->SetTexture(t.second);
                     }
                 }

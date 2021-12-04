@@ -10,6 +10,7 @@
 #include "ComponentMaterial.h"
 #include "ImGui/imgui_impl_sdl.h"
 #include "ModuleScene.h"
+
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput(Application* app, bool start_enabled) : Module(app, start_enabled)
@@ -134,7 +135,11 @@ update_status ModuleInput::PreUpdate(float dt)
 			if (fileName.substr(fileName.find_last_of(".")) == ".fbx" || fileName.substr(fileName.find_last_of(".")) == ".FBX" || fileName.substr(fileName.find_last_of(".")) == ".OBJ" || fileName.substr(fileName.find_last_of(".")) == ".obj")
 			{
 				LOG("Path of file dropped will be %s", filePath);
-				GameObject* newGameObject = App->scene->CreateGameObject(filePath);
+				const std::string fileNameT = App->fileSystem->SetNormalName(filePath);
+				const std::string goNameT = fileNameT.substr(0, fileNameT.find_last_of('.'));
+
+
+				GameObject* newGameObject = App->scene->CreateGameObject(goNameT);
 				App->import->LoadGeometry(filePath, newGameObject);
 			}
 			else if (fileName.substr(fileName.find_last_of(".")) == ".jpg" || fileName.substr(fileName.find_last_of(".")) == ".png" || fileName.substr(fileName.find_last_of(".")) == ".PNG" || fileName.substr(fileName.find_last_of(".")) == ".JPG")
@@ -165,7 +170,11 @@ update_status ModuleInput::PreUpdate(float dt)
 
 					}
 				}
-				App->editor->gameobjectSelected->GetComponent<ComponentMaterial>()->texturePath = filePath;
+				if (App->editor->gameobjectSelected)
+				{
+					std::string normPathShortTexture = "Assets/Textures/" + App->fileSystem->SetNormalName(filePath);
+					App->editor->gameobjectSelected->GetComponent<ComponentMaterial>()->texturePath = normPathShortTexture;
+				}
 			}
 		};
 		SDL_free(&filePath);

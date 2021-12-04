@@ -62,9 +62,11 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 	//Create path buffer and import to scene
 	char* buffer = nullptr;
 	uint bytesFile = App->fileSystem->Load(path, &buffer);
+	std::string normPathShort = "Assets/Models/" + App->fileSystem->SetNormalName(path);
+	
 
 	if (buffer == nullptr) {
-		std::string normPathShort = "Assets/Models/" + App->fileSystem->SetNormalName(path);
+		
 		bytesFile = App->fileSystem->Load(normPathShort.c_str(), &buffer);
 	}
 	if (buffer != nullptr) {
@@ -79,7 +81,11 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 		//Use scene->mNumMeshes to iterate on scene->mMeshes array
 
 		ComponentMaterial* materialComp = newGameObject->CreateComponent<ComponentMaterial>();
-		materialComp->texturePath = textureLoadedPath;
+		if (textureLoadedPath != nullptr)
+		{
+			std::string normPathShortTexture = "Assets/Textures/" + App->fileSystem->SetNormalName(textureLoadedPath);
+			materialComp->texturePath = normPathShortTexture;
+		}
 
 		for (size_t i = 0; i < scene->mNumMeshes; i++)
 		{
@@ -90,7 +96,7 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 			ComponentMesh* mesh = newGameObject->CreateComponent<ComponentMesh>();
 
 	
-			mesh->meshPath = path;
+			mesh->meshPath = normPathShort;
 			assimpMesh = scene->mMeshes[i];
 
 			if (scene->HasMaterials()) {
@@ -110,7 +116,6 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 						else
 						{
 							const TextureObject& textureObject = App->textures->Get(mesh->texturePath);
-							materialComp->texturePath = textureLoadedPath;
 							materialComp->SetTexture(textureObject);
 						}
 					}

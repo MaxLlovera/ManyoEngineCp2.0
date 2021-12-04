@@ -32,7 +32,7 @@ bool ModuleScene::Start()
 	//Loading house and textures since beginning
 	//App->import->LoadGeometry("Assets/Models/BakerHouse.fbx");
 	loadScene();
-	saveScene();
+	//saveScene();
 
 
 

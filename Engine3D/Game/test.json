@@ -1,8 +1,8 @@
 {
     "Game Objects": [
         {
-            "UUID": 810009186,
-            "ParentUUID": 1984490492,
+            "UUID": 405183288,
+            "ParentUUID": 152597087,
             "Name": "Root",
             "Translation": [
                 0.0,
@@ -22,9 +22,9 @@
             "Components": []
         },
         {
-            "UUID": 810009186,
-            "ParentUUID": 810009186,
-            "Name": "D:\\UNI\\3r\\Motors\\ManyoEngineCp2.0\\Engine3D\\Game\\Assets\\Models\\BakerHouse.fbx",
+            "UUID": 1626723502,
+            "ParentUUID": 405183288,
+            "Name": "street2",
             "Translation": [
                 0.0,
                 0.0,
@@ -36,18 +36,120 @@
                 1.0
             ],
             "Rotation": [
-                -0.0,
+                -1.5707963705062867,
                 0.0,
                 -0.0
             ],
             "Components": [
                 {
-                    "Type": 0,
-                    "Path": "D:\\UNI\\3r\\Motors\\ManyoEngineCp2.0\\Engine3D\\Game\\Assets\\Models\\BakerHouse.fbx"
+                    "Type": 1,
+                    "Path": "Assets/Textures/Building_V01_C.png"
                 },
                 {
                     "Type": 0,
-                    "Path": "D:\\UNI\\3r\\Motors\\ManyoEngineCp2.0\\Engine3D\\Game\\Assets\\Models\\BakerHouse.fbx"
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/street2.FBX"
+                }
+            ]
+        },
+        {
+            "UUID": 1980318607,
+            "ParentUUID": 1626723502,
+            "Name": "BakerHouse",
+            "Translation": [
+                20.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Rotation": [
+                1.5707964897155762,
+                0.0,
+                -0.0
+            ],
+            "Components": [
+                {
+                    "Type": 1,
+                    "Path": "Assets/Textures/Baker_house.png"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/BakerHouse.fbx"
+                },
+                {
+                    "Type": 0,
+                    "Path": "Assets/Models/BakerHouse.fbx"
                 }
             ]
         }

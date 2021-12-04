@@ -28,6 +28,8 @@ GameObject::GameObject() {
 
 GameObject::GameObject(const std::string name, const int UUID) : name(name), UUID(UUID)
 {
+	LCG num;
+	this->UUID = num.Int();
 	transform = CreateComponent<ComponentTransform>();
 	active = true;
 }

@@ -4,6 +4,7 @@
 #include "Math/float3.h"
 #include "Math/float4x4.h"
 #include "Geometry/Frustum.h"
+#include "ComponentCamera.h"
 
 class ModuleCamera3D : public Module
 {
@@ -22,7 +23,7 @@ public:
 	void OnSave(JSONWriter& writer) const override;
 	void OnLoad(const JSONReader& reader) override;
 
-	void MousePicking();
+	//void MousePicking();
 
 	float3 right, up, front, position, reference;
 	Frustum cameraFrustum;
@@ -34,6 +35,8 @@ public:
 	float cameraSensitivity = .5f; 
 	float cameraSpeed = 60.f;
 	bool projectionIsDirty = false;
+
+	ComponentCamera* camera;
 
 private:
 

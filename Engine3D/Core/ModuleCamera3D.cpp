@@ -253,20 +253,18 @@ void ModuleCamera3D::OnLoad(const JSONReader& reader)
 }
 
 
-void ModuleCamera3D::MousePicking()
-{
-	float normalized_x = -1.0 + 2.0 * App->input->GetMouseX() / App->window->width;
-	float normalized_y = -(1.0 - 2.0 * App->input->GetMouseY() / App->window->height);
-
-	//LineSegment picking;
-
-	LineSegment picking = cameraFrustum.UnProjectLineSegment(normalized_x, normalized_y);
-
-
-
-
-	//bool hit = picking.Intersects(game_object->aabb); // ray vs. AABB
-	//bool hit = ray_local_space.Intersects(tri, &distance, &hit_point); // ray vs. triangle
-
-
-}
+//void ModuleCamera3D::MousePicking()
+//{
+//	float normalized_x = -1.0 + 2.0 * App->input->GetMouseX() / App->window->width;
+//	float normalized_y = -(1.0 - 2.0 * App->input->GetMouseY() / App->window->height);
+//
+//	//LineSegment picking;
+//
+//	LineSegment picking = cameraFrustum.UnProjectLineSegment(normalized_x, normalized_y);
+//
+//	
+//	//bool hit = picking.Intersects(children); // ray vs. AABB
+//	//bool hit = ray_local_space.Intersects(tri, &distance, &hit_point); // ray vs. triangle
+//
+//
+//}

@@ -8,6 +8,10 @@
 #include "ComponentTransform.h"
 #include "ImGui/imgui.h"
 #include "Algorithm/Random/LCG.h"
+#include "ModuleInput.h"
+#include "ModuleWindow.h"
+#include "MathGeoLib/include/MathGeoLib.h"
+#include "ModuleCamera3D.h"
 
 GameObject::GameObject() {
 
@@ -135,3 +139,25 @@ void GameObject::DrawAABB()
 
 	glEnd();
 }
+
+
+void GameObject::MousePicking()
+{
+	float normalized_x = -1.0 + 2.0 * App->input->GetMouseX() / App->window->width;
+	float normalized_y = -(1.0 - 2.0 * App->input->GetMouseY() / App->window->height);
+
+	//LineSegment picking;
+
+	LineSegment picking = App->camera->cameraFrustum.UnProjectLineSegment(normalized_x, normalized_y);
+
+	for (int i = 0; i < children.size(); ++i)
+	{
+		bool hit = picking.Intersects(children[i]->aabb); // ray vs. AABB
+	}
+	
+	//bool hit = ray_local_space.Intersects(tri, &distance, &hit_point); // ray vs. triangle
+
+
+}
+
+

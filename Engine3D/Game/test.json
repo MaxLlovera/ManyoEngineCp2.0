@@ -30,7 +30,7 @@
         "UID": 1336602388,
         "ParentUID":1336602188,
         "Name":"HaloHelmet",
-        "Translation":[18,0,0],
+        "Translation":[2,0,0],
         "Scale":[1,1,1],
         "Rotation":[-0.707107,0,0,0.707107],
         "Components":[{
@@ -46,7 +46,7 @@
         "UID": 1336602321,
         "ParentUID":1336602388,
         "Name":"Cart",
-        "Translation":[10,0,0],
+        "Translation":[4,0,0],
         "Scale":[1,1,1],
         "Rotation":[-0.707107,0,0,0.707107],
         "Components":[{

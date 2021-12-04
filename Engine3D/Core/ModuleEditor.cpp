@@ -350,6 +350,7 @@ void ModuleEditor::MenuBar() {
                 if (ImGui::MenuItem("Cube")) {
                     GameObject* newGameObject = App->scene->CreateGameObject("Cube");
                     ComponentMesh* newMesh = new ComponentMesh(newGameObject, ComponentMesh::Shape::CUBE);
+					esfera = true;
                 }
                 if (ImGui::MenuItem("Sphere")) {
                     GameObject* newGameObject = App->scene->CreateGameObject("Sphere");
@@ -660,6 +661,9 @@ void ModuleEditor::UpdateWindowStatus() {
 
     if (showGameWindow) {
         ImGui::Begin("Game", &showGameWindow, ImGuiWindowFlags_::ImGuiWindowFlags_NoScrollbar);
+
+
+
         ImGui::End();
     }
 

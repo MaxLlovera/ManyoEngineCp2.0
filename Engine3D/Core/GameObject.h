@@ -54,6 +54,10 @@ public:
 	std::vector<GameObject*> children;
 	std::vector<Component*> components;
 	
+	void MousePicking();
+	
+
+
 	int UUID;
 
 	AABB aabb;

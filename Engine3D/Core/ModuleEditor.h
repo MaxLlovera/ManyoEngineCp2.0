@@ -74,4 +74,5 @@ public:
 
 	ImVec2 lastViewportSize;
 
+	bool esfera = false;
 };

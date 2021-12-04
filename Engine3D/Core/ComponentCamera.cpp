@@ -9,14 +9,19 @@
 
 ComponentCamera::ComponentCamera(GameObject* parent) : Component(parent)
 {
-	frustrum.type = FrustumType::PerspectiveFrustum;
+	frustum.type = FrustumType::PerspectiveFrustum;
 	
-	frustrum.farPlaneDistance=100.0f;
-	frustrum.nearPlaneDistance=1.0f;
+	frustum.farPlaneDistance=100.0f;
+	frustum.nearPlaneDistance=1.0f;
 
+
+	frustum.up = float3(0.0f, 1.0f, 0.0f);
+	frustum.front = float3(0.0f, 0.0f, 1.0f);
 	
-	frustrum.verticalFov = DEGTORAD * 90.0;
-	HorizontalFOV(frustrum.verticalFov, 16.0f, 9.0f);
+	frustum.pos = float3(0.0f, 5.0f, -15.0f);
+
+	frustum.verticalFov = DEGTORAD * 90.0;
+	HorizontalFOV(frustum.verticalFov, 16.0f, 9.0f);
 }
 
 ComponentCamera::~ComponentCamera()
@@ -26,13 +31,13 @@ ComponentCamera::~ComponentCamera()
 
 void ComponentCamera::HorizontalFOV(float vFOV, float width, float height)
 {
-	frustrum.horizontalFov = 2.0f * atan((tan(vFOV/2)) * (width / height));
+	frustum.horizontalFov = 2.0f * atan((tan(vFOV/2)) * (width / height));
 }
 
 float* ComponentCamera::GetProjectionMat()
 {
 	float4x4 projMat;
-	projMat = frustrum.ProjectionMatrix();
+	projMat = frustum.ProjectionMatrix();
 
 	return (float*) projMat.v;
 }
@@ -40,7 +45,7 @@ float* ComponentCamera::GetProjectionMat()
 float* ComponentCamera::GetViewMat()
 {
 	float4x4 viewMat;
-	frustrum.ViewMatrix();
+	frustum.ViewMatrix();
 
 	return (float*)viewMat.v;
 }

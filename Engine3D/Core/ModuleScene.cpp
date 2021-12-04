@@ -32,8 +32,6 @@ bool ModuleScene::Start()
 	//Loading house and textures since beginning
 	//App->import->LoadGeometry("Assets/Models/BakerHouse.fbx");
 	loadScene();
-	//saveScene();
-
 
 
 	return ret;
@@ -140,7 +138,7 @@ void ModuleScene::loadScene()
 		rapidjson::Document document;
 		if (document.Parse<rapidjson::kParseStopWhenDoneFlag>(buffer).HasParseError())
 		{
-			LOG("Error loading %d", fileName);
+			LOG("Error loading %s", fileName);
 		}
 		else
 		{
@@ -211,7 +209,7 @@ void ModuleScene::saveScene()
 
 	writer.StartObject();
 	writer.String("Game Objects");
-	writer.StartObject();
+
 	writer.StartArray();
 	root->save(writer);
 
@@ -220,7 +218,7 @@ void ModuleScene::saveScene()
 	writer.EndArray();
 	writer.EndObject();
 
-	if (App->fileSystem->Save("test2.json", buffer.GetString(), strlen(buffer.GetString()), false))
+	if (App->fileSystem->Save(fileName, buffer.GetString(), strlen(buffer.GetString()), false))
 	{
 		LOG("Scene saved.");
 	}

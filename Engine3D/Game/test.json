@@ -1,62 +1,55 @@
 {
-    "Game Objects":[{
-        "UID": 1642009359,
-        "ParentUID":1619219037,
-        "Name":"RootNode",
-        "Translation":[0,0,0],
-        "Scale":[1,1,1],
-        "Rotation":[0,0,0,1],
-        "Components":[]
-    },
-      {
-        "UID": 1336602188,
-        "ParentUID": 1642009359,
-        "Name": "Street",
-        "Translation": [ 0, 0, 0 ],
-        "Scale": [ 1, 1, 1 ],
-        "Rotation": [ -1.57079633, 0, 0, 0 ],
-        "Components": [
-          {
-            "Type": 0,
-            "Path": "Assets/Models/street2.fbx"
-          },
-          {
-            "Type": 1,
-            "Path": "Assets/Textures/Building_V02_C.png"
-          }
-        ]
-      },
-    {
-        "UID": 1336602388,
-        "ParentUID":1336602188,
-        "Name":"HaloHelmet",
-        "Translation":[2,0,0],
-        "Scale":[1,1,1],
-        "Rotation":[-0.707107,0,0,0.707107],
-        "Components":[{
-            "Type": 0,
-            "Path": "Assets/Models/halo_helmet.fbx"
+    "Game Objects": [
+        {
+            "UUID": 810009186,
+            "ParentUUID": 1984490492,
+            "Name": "Root",
+            "Translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Rotation": [
+                -431602080.0,
+                -431602080.0,
+                -431602080.0
+            ],
+            "Components": []
         },
         {
-            "Type": 1,
-            "Path": "Assets/Textures/haloHelmet_diffuse.png"
-        }]
-    },
-    {
-        "UID": 1336602321,
-        "ParentUID":1336602388,
-        "Name":"Cart",
-        "Translation":[4,0,0],
-        "Scale":[1,1,1],
-        "Rotation":[-0.707107,0,0,0.707107],
-        "Components":[{
-            "Type": 0,
-            "Path": "Assets/Models/cart.fbx"
-        },
-        {
-            "Type": 1,
-            "Path": "Assets/Textures/haloHelmet_diffuse.png"
-        }]
-    }
-]
+            "UUID": 810009186,
+            "ParentUUID": 810009186,
+            "Name": "D:\\UNI\\3r\\Motors\\ManyoEngineCp2.0\\Engine3D\\Game\\Assets\\Models\\BakerHouse.fbx",
+            "Translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "Scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "Rotation": [
+                -0.0,
+                0.0,
+                -0.0
+            ],
+            "Components": [
+                {
+                    "Type": 0,
+                    "Path": "D:\\UNI\\3r\\Motors\\ManyoEngineCp2.0\\Engine3D\\Game\\Assets\\Models\\BakerHouse.fbx"
+                },
+                {
+                    "Type": 0,
+                    "Path": "D:\\UNI\\3r\\Motors\\ManyoEngineCp2.0\\Engine3D\\Game\\Assets\\Models\\BakerHouse.fbx"
+                }
+            ]
+        }
+    ]
 }

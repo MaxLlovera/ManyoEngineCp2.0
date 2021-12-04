@@ -21,6 +21,7 @@ class ModuleImport;
 class ModuleFileSystem;
 class ModuleTextures;
 class ModuleClock;
+class ModuleResources;
 
 class Application
 {
@@ -37,7 +38,7 @@ public:
 	ModuleFileSystem* fileSystem { nullptr };
 	ModuleTextures* textures { nullptr };
 	ModuleClock* clock{ nullptr };
-
+	ModuleResources* resources{ nullptr };
 	Application();
 	~Application();
 

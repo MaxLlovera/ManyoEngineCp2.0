@@ -197,6 +197,18 @@
     <ClCompile Include="Core\ModuleClock.cpp">
       <Filter>Engine\Modules</Filter>
     </ClCompile>
+    <ClCompile Include="Core\ModuleResources.cpp">
+      <Filter>Engine\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Resource.cpp">
+      <Filter>Engine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ResourceTexture.cpp">
+      <Filter>Engine\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ResourceMesh.cpp">
+      <Filter>Engine\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\ImGui\imconfig.h">
@@ -739,6 +751,18 @@
     <ClInclude Include="Core\ModuleClock.h">
       <Filter>Engine\Modules</Filter>
     </ClInclude>
+    <ClInclude Include="Core\ModuleResources.h">
+      <Filter>Engine\Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Resource.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ResourceTexture.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ResourceMesh.h">
+      <Filter>Engine\Resources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ExternalLibraries">
@@ -797,6 +821,9 @@
     </Filter>
     <Filter Include="Engine\Importers">
       <UniqueIdentifier>{7b912166-8b1a-4c60-bbd9-c098f40b054f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resources">
+      <UniqueIdentifier>{f02c783e-1bc3-48f9-aec6-0b503b99bad9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

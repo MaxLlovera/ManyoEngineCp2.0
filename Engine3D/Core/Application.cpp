@@ -13,6 +13,7 @@
 #include "ModuleFileSystem.h"
 #include "ModuleTextures.h"
 #include "ModuleClock.h"
+#include "ModuleResources.h"
 #include "Globals.h"
 
 Application::Application()
@@ -29,7 +30,7 @@ Application::Application()
 	fileSystem = new ModuleFileSystem(this);
 	textures = new ModuleTextures(this);
 	clock = new ModuleClock(this);
-
+	resources = new ModuleResources(this);
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
 	// They will CleanUp() in reverse order

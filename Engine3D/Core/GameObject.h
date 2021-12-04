@@ -47,7 +47,6 @@ public:
 	void PropagateTransform();
 	void GenerateGlobalAABB(ComponentMesh* mesh);
 	void DrawAABB();
-	void DrawOOBB();
 
 	std::string name;
 	GameObject* parent = nullptr;

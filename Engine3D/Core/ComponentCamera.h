@@ -22,10 +22,8 @@ public:
 	void OnSave();
 	void OnLoad();
 
-	void NearPlane(float dist);
-	void FarPlane(float dist);
-	void VerticalFOV(float vFOV, float width, float height);
-	void HorizontalFOV(float hFOV, float width, float height);
+	//void VerticalFOV(float vFOV, float width, float height);
+	void HorizontalFOV(float vFOV, float width, float height);
 
 	float* GetProjectionMat();
 	float* GetViewMat();

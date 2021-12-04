@@ -8,27 +8,29 @@
         "Rotation":[0,0,0,1],
         "Components":[]
     },
-    {
+      {
         "UID": 1336602188,
-        "ParentUID":1642009359,
-        "Name":"BakerHouse",
-        "Translation":[0,0,0],
-        "Scale":[1,1,1],
-        "Rotation":[0,0,0],
-        "Components":[{
+        "ParentUID": 1642009359,
+        "Name": "Street",
+        "Translation": [ 0, 0, 0 ],
+        "Scale": [ 1, 1, 1 ],
+        "Rotation": [ -1.57079633, 0, 0, 0 ],
+        "Components": [
+          {
             "Type": 0,
-            "Path": "Assets/Models/BakerHouse.fbx"
-        },
-        {
+            "Path": "Assets/Models/street2.fbx"
+          },
+          {
             "Type": 1,
-            "Path": "Assets/Textures/Baker_house.png"
-        }]
-    },
+            "Path": "Assets/Textures/Building_V02_C.png"
+          }
+        ]
+      },
     {
         "UID": 1336602388,
         "ParentUID":1336602188,
         "Name":"HaloHelmet",
-        "Translation":[2,0,0],
+        "Translation":[18,0,0],
         "Scale":[1,1,1],
         "Rotation":[-0.707107,0,0,0.707107],
         "Components":[{
@@ -44,7 +46,7 @@
         "UID": 1336602321,
         "ParentUID":1336602388,
         "Name":"Cart",
-        "Translation":[4,0,0],
+        "Translation":[10,0,0],
         "Scale":[1,1,1],
         "Rotation":[-0.707107,0,0,0.707107],
         "Components":[{

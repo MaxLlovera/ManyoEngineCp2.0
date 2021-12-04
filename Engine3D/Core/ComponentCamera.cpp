@@ -10,7 +10,13 @@
 ComponentCamera::ComponentCamera(GameObject* parent) : Component(parent)
 {
 	frustrum.type = FrustumType::PerspectiveFrustum;
+	
+	frustrum.farPlaneDistance=100.0f;
+	frustrum.nearPlaneDistance=1.0f;
 
+	
+	frustrum.verticalFov = DEGTORAD * 90.0;
+	HorizontalFOV(frustrum.verticalFov, 16.0f, 9.0f);
 }
 
 ComponentCamera::~ComponentCamera()
@@ -18,26 +24,9 @@ ComponentCamera::~ComponentCamera()
 
 }
 
-void ComponentCamera::NearPlane(float dist)
+void ComponentCamera::HorizontalFOV(float vFOV, float width, float height)
 {
-	frustrum.nearPlaneDistance = dist;
-}
-
-void ComponentCamera::FarPlane(float dist)
-{
-	frustrum.farPlaneDistance = dist;
-}
-
-void ComponentCamera::VerticalFOV(float vFOV, float width, float height)
-{
-	frustrum.verticalFov = vFOV;
-	frustrum.horizontalFov = 2.f * atan((tan(frustrum.verticalFov * 0.5)) * (width/height));
-}
-
-void ComponentCamera::HorizontalFOV(float hFOV, float width, float height)
-{
-	frustrum.horizontalFov = hFOV;
-	frustrum.verticalFov = 2.f * atan((tan(frustrum.horizontalFov * 0.5)) * (width / height));
+	frustrum.horizontalFov = 2.0f * atan((tan(vFOV/2)) * (width / height));
 }
 
 float* ComponentCamera::GetProjectionMat()

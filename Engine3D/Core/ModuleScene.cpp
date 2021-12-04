@@ -13,6 +13,7 @@
 #include <queue>
 #include "Algorithm/Random/LCG.h"
 #include "ModuleFileSystem.h"
+#include "GameObject.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -30,8 +31,8 @@ bool ModuleScene::Start()
 
 	//Loading house and textures since beginning
 	//App->import->LoadGeometry("Assets/Models/BakerHouse.fbx");
-
-	loadJSON();
+	loadScene();
+	saveScene();
 
 
 
@@ -129,17 +130,17 @@ GameObject* ModuleScene::CreateGameObject(const std::string name, GameObject* pa
 	return temp;
 }
 
-void ModuleScene::loadJSON()
+void ModuleScene::loadScene()
 {
 	char* buffer = nullptr;
-	uint bytesFile = App->fileSystem->Load("test.json", &buffer);
+	uint bytesFile = App->fileSystem->Load(fileName, &buffer);
 
 	if (bytesFile)
 	{
 		rapidjson::Document document;
 		if (document.Parse<rapidjson::kParseStopWhenDoneFlag>(buffer).HasParseError())
 		{
-			LOG("Error loading test.json");
+			LOG("Error loading %d", fileName);
 		}
 		else
 		{
@@ -148,8 +149,8 @@ void ModuleScene::loadJSON()
 			{
 				const std::string name = currentGameObjectJson["Name"].GetString();
 				const bool isRootGO = isRoot(name);
-				const int parentUUID = currentGameObjectJson["ParentUID"].GetInt();
-				const int UUID = currentGameObjectJson["UID"].GetInt();
+				const int parentUUID = currentGameObjectJson["ParentUUID"].GetInt();
+				const int UUID = currentGameObjectJson["UUID"].GetInt();
 
 				GameObject* parent = getParent(root->children, parentUUID);
 				GameObject* gameObject = CreateGameObject(name, parent);
@@ -203,6 +204,32 @@ void ModuleScene::loadJSON()
 	RELEASE_ARRAY(buffer);
 }
 
+void ModuleScene::saveScene()
+{
+	rapidjson::StringBuffer buffer;
+	JSONWriter writer(buffer );
+
+	writer.StartObject();
+	writer.String("Game Objects");
+	writer.StartObject();
+	writer.StartArray();
+	root->save(writer);
+
+	writeChildren(writer, root->children);
+
+	writer.EndArray();
+	writer.EndObject();
+
+	if (App->fileSystem->Save(fileName, buffer.GetString(), strlen(buffer.GetString()), false))
+	{
+		LOG("Scene saved.");
+	}
+	else
+	{
+		LOG("Scene not saved.");
+	}
+}
+
 
 GameObject* ModuleScene::getParent(const std::vector<GameObject*> children, const int parentUUID)
 {
@@ -224,4 +251,14 @@ bool ModuleScene::isRoot(std::string name)
 	for (auto& c : name) c = tolower(c);
 
 	return name.find("root") != std::string::npos;
+}
+
+void ModuleScene::writeChildren(JSONWriter& writer, std::vector<GameObject*> children)
+{
+	for (GameObject* sceneGO : children)
+	{
+		sceneGO->save(writer);
+
+		if (sceneGO->children.size() > 0) writeChildren(writer, sceneGO->children);
+	}
 }

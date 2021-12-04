@@ -13,6 +13,7 @@
 #define LOAD_JSON_FLOAT(b) { b = config.HasMember(#b) ? config[#b].GetFloat() : b; }
 #define SAVE_JSON_FLOAT(b) { writer.String(#b); writer.Double(b); }
 
+
 #define LOG(format, ...) log(__FILE__, __LINE__, format, __VA_ARGS__);
 
 void log(const char file[], int line, const char* format, ...);

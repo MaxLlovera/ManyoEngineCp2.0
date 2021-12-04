@@ -160,4 +160,19 @@ void GameObject::MousePicking()
 
 }
 
+void GameObject::save(JSONWriter &writer)
+{
+	writer.StartObject();
+
+	writer.String("UUID");
+	writer.Int(UUID);
+	writer.String("ParentUUID");
+	LCG num;
+	writer.Int(parent != nullptr ? parent->UUID : num.Int());
+	writer.String("Name");
+	writer.String(name.c_str());
+
+	writer.EndObject();
+}
+
 

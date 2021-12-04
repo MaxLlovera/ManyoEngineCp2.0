@@ -4,10 +4,15 @@
 #include <string>
 #include "Geometry/AABB.h"
 #include "Geometry/OBB.h"
+#include "rapidjson-1.1.0/include/rapidjson/prettywriter.h"
+#include "rapidjson-1.1.0/include/rapidjson/document.h"
 
 class Component;
 class ComponentTransform;
 class ComponentMesh;
+
+typedef rapidjson::PrettyWriter<rapidjson::StringBuffer> JSONWriter;
+typedef rapidjson::Value JSONReader;
 
 class GameObject {
 
@@ -20,6 +25,7 @@ public:
 
 	void Update(float dt);
 	void OnGui();
+	void save(JSONWriter& writer);
 
 	template<class T> T* CreateComponent()
 	{
@@ -55,7 +61,6 @@ public:
 	std::vector<Component*> components;
 	
 	void MousePicking();
-	
 
 
 	int UUID;

@@ -13,9 +13,10 @@ public:
 	void SetTexture(const TextureObject& texture);
 	void OnGui() override;
 	inline uint GetTextureId() const { return textureId; }
-
+	std::string texturePath;
 private:
 
 	std::string textureName;
+
 	uint textureId = 0, width = 0, height = 0;
 };

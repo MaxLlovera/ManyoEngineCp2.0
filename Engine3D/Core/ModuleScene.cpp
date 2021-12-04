@@ -220,7 +220,7 @@ void ModuleScene::saveScene()
 	writer.EndArray();
 	writer.EndObject();
 
-	if (App->fileSystem->Save(fileName, buffer.GetString(), strlen(buffer.GetString()), false))
+	if (App->fileSystem->Save("test2.json", buffer.GetString(), strlen(buffer.GetString()), false))
 	{
 		LOG("Scene saved.");
 	}

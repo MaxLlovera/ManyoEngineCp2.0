@@ -12,7 +12,10 @@
 #include "par_shapes.h"
 
 
-ComponentMesh::ComponentMesh(GameObject* parent) : Component(parent) {}
+ComponentMesh::ComponentMesh(GameObject* parent) : Component(parent) 
+{
+	componentType = COMPONENT_TYPE::MESH;
+}
 
 ComponentMesh::ComponentMesh(GameObject* parent, Shape shape) : Component(parent)
 {
@@ -28,6 +31,9 @@ ComponentMesh::ComponentMesh(GameObject* parent, Shape shape) : Component(parent
 		CopyParMesh(par_shapes_create_parametric_sphere(20, 20));
 		break;
 	}
+
+	componentType = COMPONENT_TYPE::MESH;
+
 }
 
 ComponentMesh::~ComponentMesh()

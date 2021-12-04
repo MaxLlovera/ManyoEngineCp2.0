@@ -6,6 +6,7 @@
 #include "ModuleFileSystem.h"
 #include "ComponentMesh.h"
 #include "ComponentTransform.h"
+#include "ComponentMaterial.h"
 #include "ImGui/imgui.h"
 #include "Algorithm/Random/LCG.h"
 #include "ModuleInput.h"
@@ -166,12 +167,66 @@ void GameObject::save(JSONWriter &writer)
 
 	writer.String("UUID");
 	writer.Int(UUID);
+
 	writer.String("ParentUUID");
 	LCG num;
 	writer.Int(parent != nullptr ? parent->UUID : num.Int());
+
 	writer.String("Name");
 	writer.String(name.c_str());
 
+	writer.String("Translation");
+	writer.StartArray();
+	writer.Double(transform->GetPosition().x);
+	writer.Double(transform->GetPosition().y);
+	writer.Double(transform->GetPosition().z);
+	writer.EndArray();
+
+	writer.String("Scale");
+	writer.StartArray();
+	writer.Double(transform->GetScale().x);
+	writer.Double(transform->GetScale().y);
+	writer.Double(transform->GetScale().z);
+	writer.EndArray();
+
+	writer.String("Rotation");
+	writer.StartArray();
+	writer.Double(transform->GetRotation().x);
+	writer.Double(transform->GetRotation().y);
+	writer.Double(transform->GetRotation().z);
+	writer.EndArray();
+
+	writer.String("Components");
+	writer.StartArray();
+	for (Component* component : components)
+	{
+		switch (component->getType())
+		{
+			case COMPONENT_TYPE::MESH:
+				{
+					writer.StartObject();
+					writer.String("Type");
+					writer.Int(0);
+					writer.String("Path");
+					writer.String(dynamic_cast<ComponentMesh*>(component)->meshPath.c_str());
+					writer.EndObject();
+				}
+				break;
+			case COMPONENT_TYPE::MATERIAL:
+				{
+					writer.StartObject();
+					writer.String("Type");
+					writer.Int(1);
+					writer.String("Path");
+					ComponentMaterial* material = dynamic_cast<ComponentMaterial*>(component);
+					writer.String(material->texturePath.c_str());
+					writer.EndObject();
+				}
+				break;
+		}
+
+	}
+	writer.EndArray();
 	writer.EndObject();
 }
 

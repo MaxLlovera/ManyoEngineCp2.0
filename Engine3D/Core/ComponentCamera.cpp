@@ -22,6 +22,8 @@ ComponentCamera::ComponentCamera(GameObject* parent) : Component(parent)
 
 	frustum.verticalFov = DEGTORAD * 90.0;
 	HorizontalFOV(frustum.verticalFov, 16.0f, 9.0f);
+
+	componentType = COMPONENT_TYPE::CAMERA;
 }
 
 ComponentCamera::~ComponentCamera()

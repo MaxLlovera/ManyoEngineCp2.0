@@ -14,6 +14,8 @@ ComponentTransform::ComponentTransform(GameObject* parent) : Component(parent) {
 
 	transformMatrix.SetIdentity();
 	transformMatrixLocal.SetIdentity();
+	componentType = COMPONENT_TYPE::TRANSFORM;
+
 }
 
 

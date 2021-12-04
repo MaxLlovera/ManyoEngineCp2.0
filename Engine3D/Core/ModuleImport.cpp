@@ -85,6 +85,7 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 
 
 			ComponentMesh* mesh = newGameObject->CreateComponent<ComponentMesh>();
+			mesh->meshPath = path;
 			assimpMesh = scene->mMeshes[i];
 
 			if (scene->HasMaterials()) {
@@ -99,6 +100,7 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 						{
 							const TextureObject& textureObject = App->textures->Load(mesh->texturePath);
 							ComponentMaterial* materialComp = newGameObject->CreateComponent<ComponentMaterial>();
+							materialComp->texturePath = textureLoadedPath;
 							materialComp->SetTexture(textureObject);
 
 						}
@@ -106,6 +108,7 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 						{
 							const TextureObject& textureObject = App->textures->Get(mesh->texturePath);
 							ComponentMaterial* materialComp = newGameObject->CreateComponent<ComponentMaterial>();
+							materialComp->texturePath = textureLoadedPath;
 							materialComp->SetTexture(textureObject);
 						}
 					}

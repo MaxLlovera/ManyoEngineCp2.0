@@ -3,7 +3,10 @@
 #include "ImGui/imgui.h"
 #include "ComponentMaterial.h"
 
-ComponentMaterial::ComponentMaterial(GameObject* parent) : Component(parent) {}
+ComponentMaterial::ComponentMaterial(GameObject* parent) : Component(parent) 
+{
+	componentType = COMPONENT_TYPE::MATERIAL;
+}
 
 void ComponentMaterial::SetTexture(const TextureObject& texture)
 {

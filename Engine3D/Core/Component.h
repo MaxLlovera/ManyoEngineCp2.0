@@ -5,6 +5,13 @@
 #include <string>
 #include "GameObject.h"
 
+enum COMPONENT_TYPE  {
+	TRANSFORM,
+	MESH,
+	MATERIAL,
+	CAMERA
+};
+
 class Component {
 
 public:
@@ -24,9 +31,11 @@ public:
 	virtual bool Enable() { return active = true; };
 	virtual bool Disable() { return active = false; };
 	virtual void OnGui() { }
+	virtual COMPONENT_TYPE getType() { return componentType; }
 
 public:
 
 	GameObject* owner = nullptr;
 	bool active = true;
+	COMPONENT_TYPE componentType;
 };

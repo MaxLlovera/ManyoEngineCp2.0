@@ -77,14 +77,19 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 
 	if (scene != nullptr && scene->HasMeshes()) {
 		//Use scene->mNumMeshes to iterate on scene->mMeshes array
+
+		ComponentMaterial* materialComp = newGameObject->CreateComponent<ComponentMaterial>();
+		materialComp->texturePath = textureLoadedPath;
+
 		for (size_t i = 0; i < scene->mNumMeshes; i++)
 		{
 			bool nameFound = false;
 			std::string name;
 			FindNodeName(scene, i, name);
 
-
 			ComponentMesh* mesh = newGameObject->CreateComponent<ComponentMesh>();
+
+	
 			mesh->meshPath = path;
 			assimpMesh = scene->mMeshes[i];
 
@@ -99,24 +104,17 @@ bool ModuleImport::LoadGeometry(const char* path, GameObject* newGameObject, con
 						if (!App->textures->Find(mesh->texturePath))
 						{
 							const TextureObject& textureObject = App->textures->Load(mesh->texturePath);
-							ComponentMaterial* materialComp = newGameObject->CreateComponent<ComponentMaterial>();
-							materialComp->texturePath = textureLoadedPath;
 							materialComp->SetTexture(textureObject);
 
 						}
 						else
 						{
 							const TextureObject& textureObject = App->textures->Get(mesh->texturePath);
-							ComponentMaterial* materialComp = newGameObject->CreateComponent<ComponentMaterial>();
 							materialComp->texturePath = textureLoadedPath;
 							materialComp->SetTexture(textureObject);
 						}
 					}
 
-				}
-				else
-				{
-					newGameObject->CreateComponent<ComponentMaterial>();
 				}
 
 			}

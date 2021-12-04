@@ -165,6 +165,7 @@ update_status ModuleInput::PreUpdate(float dt)
 
 					}
 				}
+				App->editor->gameobjectSelected->GetComponent<ComponentMaterial>()->texturePath = filePath;
 			}
 		};
 		SDL_free(&filePath);

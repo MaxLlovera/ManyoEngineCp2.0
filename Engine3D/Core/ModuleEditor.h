@@ -73,6 +73,7 @@ public:
 	GameObject* gameobjectSelected;
 
 	ImVec2 lastViewportSize;
+	ImVec2 lastViewportSizeGame;
 
 	bool esfera = false;
 };

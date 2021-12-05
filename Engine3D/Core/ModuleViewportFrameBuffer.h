@@ -21,6 +21,7 @@ public:
 	uint frameBuffer = 0;
 	uint renderBufferoutput = 0;
 	uint texture = 0;
+	//uint textureGame = 0;
 	bool show_viewport_window = true;
 
 };

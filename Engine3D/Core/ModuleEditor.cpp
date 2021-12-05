@@ -664,8 +664,15 @@ void ModuleEditor::UpdateWindowStatus() {
 
     if (showGameWindow) {
         ImGui::Begin("Game", &showGameWindow, ImGuiWindowFlags_::ImGuiWindowFlags_NoScrollbar);
-
-
+		
+		ImVec2 viewportSizeGame = ImGui::GetCurrentWindow()->Size;
+		/*if (viewportSizeGame.x != lastViewportSizeGame.x || viewportSizeGame.y != lastViewportSizeGame.y)
+		{
+			App->camera->aspectRatio = viewportSizeGame.x / viewportSizeGame.y;
+			App->camera->RecalculateProjection();
+		}*/
+		//lastViewportSizeGame = viewportSizeGame;
+		ImGui::Image((ImTextureID)App->viewportBufferGame->texture, viewportSizeGame, ImVec2(0, 1), ImVec2(1, 0));
 
         ImGui::End();
     }

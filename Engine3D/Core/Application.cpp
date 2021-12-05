@@ -26,6 +26,7 @@ Application::Application()
 	camera = new ModuleCamera3D(this);
 	editor = new ModuleEditor(this);
 	viewportBuffer = new ModuleViewportFrameBuffer(this);
+	viewportBufferGame = new ModuleViewportFrameBuffer(this);
 	import = new ModuleImport(this);
 	fileSystem = new ModuleFileSystem(this);
 	textures = new ModuleTextures(this);
@@ -45,6 +46,7 @@ Application::Application()
 	AddModule(clock);
 
 	// Scenes
+	AddModule(viewportBufferGame);
 	AddModule(viewportBuffer);
 	AddModule(scene);
 	AddModule(editor);

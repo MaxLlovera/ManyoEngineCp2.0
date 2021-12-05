@@ -1,6 +1,6 @@
 #include "ComponentCamera.h"
 #include "Application.h"
-
+#include "ImGui/imgui.h"
 
 //ComponentCamera::ComponentCamera()
 //{
@@ -11,8 +11,8 @@ ComponentCamera::ComponentCamera(GameObject* parent) : Component(parent)
 {
 	frustum.type = FrustumType::PerspectiveFrustum;
 	
-	frustum.farPlaneDistance=100.0f;
-	frustum.nearPlaneDistance=1.0f;
+	frustum.farPlaneDistance = farDistance;
+	frustum.nearPlaneDistance=nearDistance;
 
 
 	frustum.up = float3(0.0f, 1.0f, 0.0f);
@@ -50,4 +50,19 @@ float* ComponentCamera::GetViewMat()
 	frustum.ViewMatrix();
 
 	return (float*)viewMat.v;
+}
+
+void ComponentCamera::DrawFrustum()
+{
+
+
+}
+void ComponentCamera::OnGui()
+{
+	if (ImGui::CollapsingHeader("Camera"))
+	{
+		ImGui::DragFloat("Near Plane", &nearDistance);
+		ImGui::DragFloat("Far Plane", &farDistance);
+		ImGui::DragFloat("FOV", &frustum.horizontalFov);
+	}
 }

@@ -346,7 +346,11 @@ void ModuleEditor::MenuBar() {
             if (ImGui::MenuItem("Create empty GameObject")) {
                 App->scene->CreateGameObject();
             }
-
+			if (ImGui::MenuItem("Create Camera"))
+			{
+				GameObject* newGameObject = App->scene->CreateGameObject("Camera");
+				ComponentCamera* newCamera = new ComponentCamera(newGameObject);
+			}
             if (ImGui::BeginMenu("3D Objects")) {
                 if (ImGui::MenuItem("Cube")) {
                     GameObject* newGameObject = App->scene->CreateGameObject("Cube");

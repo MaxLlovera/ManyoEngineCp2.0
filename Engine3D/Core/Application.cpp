@@ -245,8 +245,8 @@ void Application::AddModule(Module* mod)
 
 void Application::DrawFPSDiagram() {
 
-	ImGui::InputText("App Name", TITLE, 20);
-	ImGui::InputText("Organization", ORGANITZATION, 20);
+	ImGui::InputText("App Name", engineName, 20);
+	ImGui::InputText("Organization", orgName, 20);
 	ImGui::SliderInt("Framerate", &cap, -1, 120);
 
 	if (fps_log.size() != 30)

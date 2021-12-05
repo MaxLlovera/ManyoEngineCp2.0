@@ -83,7 +83,8 @@ public:
 	bool closeEngine;
 	bool vsync;
 
-
+	char engineName[20] = TITLE;
+	char orgName[20] = ORGANITZATION;
 
 private: 
 	std::vector<Module*> modules;

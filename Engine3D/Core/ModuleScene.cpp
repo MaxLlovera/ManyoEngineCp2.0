@@ -13,7 +13,9 @@
 #include <queue>
 #include "Algorithm/Random/LCG.h"
 #include "ModuleFileSystem.h"
+#include "ModuleViewportFrameBuffer.h"
 #include "GameObject.h"
+#include "ComponentCamera.h"
 
 ModuleScene::ModuleScene(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -28,7 +30,9 @@ bool ModuleScene::Start()
 	int UUID = num.Int();
 
 	root = new GameObject("Root", UUID);
-
+	camera = CreateGameObject("Main Camera", root);
+	camera->CreateComponent<ComponentCamera>();
+	camera->GetComponent<ComponentCamera>()->Start();
 	//Loading house and textures since beginning
 	//App->import->LoadGeometry("Assets/Models/BakerHouse.fbx");
 	loadScene();
@@ -65,6 +69,7 @@ bool ModuleScene::CleanUp()
 
 update_status ModuleScene::Update(float dt)
 {
+
 	std::queue<GameObject*> S;
 	for (GameObject* child : root->children)
 	{
@@ -82,6 +87,27 @@ update_status ModuleScene::Update(float dt)
 		}
 	}
 
+	if (camera != nullptr)
+	{
+		camera->GetComponent<ComponentCamera>()->PreUpdate(dt);
+		std::queue<GameObject*> S;
+		for (GameObject* child : root->children)
+		{
+			S.push(child);
+		}
+
+		while (!S.empty())
+		{
+			GameObject* go = S.front();
+			go->Update(dt);
+			S.pop();
+			for (GameObject* child : go->children)
+			{
+				S.push(child);
+			}
+		}
+		App->viewportBufferGame->PostUpdate(dt);
+	}
 	glDisable(GL_DEPTH_TEST);
 
 	if (App->editor->gameobjectSelected)
@@ -105,6 +131,7 @@ update_status ModuleScene::Update(float dt)
 
 	glEnable(GL_DEPTH_TEST);
 
+	
 
 	return UPDATE_CONTINUE;
 }

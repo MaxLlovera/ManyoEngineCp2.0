@@ -33,6 +33,7 @@ public:
 	bool isRoot(std::string name);
 
 	GameObject* root;
+	GameObject* camera;
 	const char* fileName = "test.json";
 
 private:

@@ -17,21 +17,33 @@ public:
 	//ComponentCamera();
 	ComponentCamera(GameObject* parent);
 	~ComponentCamera();
-
-	void Update();
+	
+	bool Start();
+	bool Update(float dt)override;
+	bool PreUpdate(float dt);
 	void OnSave();
 	void OnLoad();
 	void OnGui() override;
+	void LookAt(const float3& point);
 	//void VerticalFOV(float vFOV, float width, float height);
 	void HorizontalFOV(float vFOV, float width, float height);
 
 	float* GetProjectionMat();
-	float* GetViewMat();
-
+	void CalculateViewMatrix();
+	void RecalculateProjection();
 	void DrawFrustum();
+
+	float3 right, up, front, position, reference;
+	Frustum cameraFrustum;
+	float4x4 viewMatrix;
+	float aspectRatio = 1.f;
+	float verticalFOV = 60.f;
+	float nearPlaneDistance = 0.1f;
+	float farPlaneDistance = 5000.f;
+	float cameraSensitivity = .5f;
+	float cameraSpeed = 60.f;
+	bool projectionIsDirty = false;
 public:
 	Frustum frustum;
-	float farDistance = 500.0f;
-	float nearDistance = 1.0f;
-
+	float lastDeltaX = 0.f, lastDeltaY = 0.f;
 };

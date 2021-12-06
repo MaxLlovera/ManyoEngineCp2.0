@@ -48,9 +48,8 @@ Application::Application()
 	// Scenes
 	AddModule(viewportBufferGame);
 	AddModule(viewportBuffer);
-	AddModule(scene);
 	AddModule(editor);
-
+	AddModule(scene);
 	// Renderer last!
 	AddModule(renderer3D);
 

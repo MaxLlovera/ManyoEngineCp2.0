@@ -25,6 +25,9 @@ This project is forked from: https://github.com/solidajenjo/Engine3D
 
 - Timer Play/Pause/Stop functionality
 
+- Selecting Game Objects open a component Inspector where you can edit and show some debuging
+options like Boundary Boxes of a mesh, Frustum culling and Fov for the Main Camera.
+
 ## Layout:
 - Menu bar:
 	File: 

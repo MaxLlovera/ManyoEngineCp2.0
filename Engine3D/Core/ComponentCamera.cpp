@@ -23,7 +23,7 @@ ComponentCamera::ComponentCamera(GameObject* parent) : Component(parent)
 	
 	frustum.verticalFov = DEGTORAD * 60.0;
 	HorizontalFOV(frustum.verticalFov, 16.0f, 9.0f);
-	DrawFrustum();
+
 	componentType = COMPONENT_TYPE::CAMERA;
 }
 
@@ -50,7 +50,11 @@ bool ComponentCamera::Update(float dt)
 	frustum.front = owner->transform->GetForward();
 	frustum.up = owner->transform->GetUp();
 	viewMatrix = frustum.ViewMatrix();
-
+	if (drawFrustum)
+	{
+		DrawFrustum();
+	}
+	
 	bool ret = true;
 
 	return ret;
@@ -107,8 +111,8 @@ void ComponentCamera::CalculateViewMatrix()
 void ComponentCamera::RecalculateProjection()
 {
 	frustum.type = FrustumType::PerspectiveFrustum;
-	frustum.nearPlaneDistance = nearPlaneDistance;
-	frustum.farPlaneDistance = farPlaneDistance;
+	//frustum.nearPlaneDistance = nearPlaneDistance;
+	//frustum.farPlaneDistance = farPlaneDistance;
 	frustum.verticalFov = (verticalFOV * 3.141592 / 2) / 180.f;
 	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspectRatio);
 }
@@ -117,43 +121,14 @@ void ComponentCamera::DrawFrustum()
 {
 	static float3 corners[8];
 	frustum.GetCornerPoints(corners);
-
+	int points[24] = { 0,2, 2,6, 6,4, 4,0, 0,1, 1,3, 3,2, 3,7, 7,5, 5,1, 6,7, 5,4 };
 	glBegin(GL_LINES);
-	glVertex3f(corners[0].x, corners[0].y, corners[0].z);
-	glVertex3f(corners[1].x, corners[1].y, corners[1].z);
 
-	glVertex3f(corners[0].x, corners[0].y, corners[0].z);
-	glVertex3f(corners[4].x, corners[4].y, corners[4].z);
+	for (int i = 0; i < 24; ++i)
+	{
+		glVertex3fv(&corners[points[i]].x);
+	}
 
-	glVertex3f(corners[4].x, corners[4].y, corners[4].z);
-	glVertex3f(corners[5].x, corners[5].y, corners[5].z);
-
-	glVertex3f(corners[0].x, corners[0].y, corners[0].z);
-	glVertex3f(corners[2].x, corners[2].y, corners[2].z);
-
-	glVertex3f(corners[2].x, corners[2].y, corners[2].z);
-	glVertex3f(corners[3].x, corners[3].y, corners[3].z);
-
-	glVertex3f(corners[1].x, corners[1].y, corners[1].z);
-	glVertex3f(corners[3].x, corners[3].y, corners[3].z);
-
-	glVertex3f(corners[1].x, corners[1].y, corners[1].z);
-	glVertex3f(corners[5].x, corners[5].y, corners[5].z);
-
-	glVertex3f(corners[4].x, corners[4].y, corners[4].z);
-	glVertex3f(corners[6].x, corners[6].y, corners[6].z);
-
-	glVertex3f(corners[2].x, corners[2].y, corners[2].z);
-	glVertex3f(corners[6].x, corners[6].y, corners[6].z);
-
-	glVertex3f(corners[6].x, corners[6].y, corners[6].z);
-	glVertex3f(corners[7].x, corners[7].y, corners[7].z);
-
-	glVertex3f(corners[5].x, corners[5].y, corners[5].z);
-	glVertex3f(corners[7].x, corners[7].y, corners[7].z);
-
-	glVertex3f(corners[3].x, corners[3].y, corners[3].z);
-	glVertex3f(corners[7].x, corners[7].y, corners[7].z);
 	glEnd();
 }
 
@@ -161,18 +136,19 @@ void ComponentCamera::OnGui()
 {
 	if (ImGui::CollapsingHeader("Camera"))
 	{
-		if (ImGui::DragFloat("Near Plane", &frustum.nearPlaneDistance))
+		if (ImGui::SliderFloat("Near Plane", &frustum.nearPlaneDistance, 0.1f,500.f))
 		{
 			projectionIsDirty = true;
 		}
-		if (ImGui::DragFloat("Far Plane", &frustum.farPlaneDistance))
+		if (ImGui::SliderFloat("Far Plane", &frustum.farPlaneDistance,100.f,1000.f))
 		{
 			projectionIsDirty = true;
 		}
-		if (ImGui::DragFloat("FOV", &verticalFOV))
+		if (ImGui::SliderFloat("FOV", &verticalFOV,1.f,300.f))
 		{
 			projectionIsDirty = true;
 			RecalculateProjection();
 		}
+		ImGui::Checkbox("Show Frustum:", &drawFrustum);
 	}
 }

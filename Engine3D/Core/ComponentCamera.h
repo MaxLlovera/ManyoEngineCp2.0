@@ -39,7 +39,7 @@ public:
 	float aspectRatio = 1.f;
 	float verticalFOV = 60.f;
 	float nearPlaneDistance = 0.1f;
-	float farPlaneDistance = 5000.f;
+	float farPlaneDistance = 500.f;
 	float cameraSensitivity = .5f;
 	float cameraSpeed = 60.f;
 	bool projectionIsDirty = false;
@@ -47,4 +47,5 @@ public:
 public:
 	Frustum frustum;
 	float lastDeltaX = 0.f, lastDeltaY = 0.f;
+	bool drawFrustum = false;
 };

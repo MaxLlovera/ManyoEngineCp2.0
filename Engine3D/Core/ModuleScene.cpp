@@ -31,6 +31,11 @@ bool ModuleScene::Start()
 	int UUID = num.Int();
 
 	root = new GameObject("Root", UUID);
+
+	assets = new File("Library");
+	assets->path = assets->name;
+	assets->FolderFiles();
+
 	camera = CreateGameObject("Main Camera", root);
 	camera->CreateComponent<ComponentCamera>();
 	camera->GetComponent<ComponentCamera>()->Start();

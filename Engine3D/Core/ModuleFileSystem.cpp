@@ -544,6 +544,24 @@ std::string ModuleFileSystem::GetUniqueName(const char* path, const char* name) 
 	return finalName;
 }
 
+
+void File::FolderFiles()
+{
+	std::vector<std::string> directories;
+	App->fileSystem->DiscoverFiles(this->path.c_str(), this->files, directories);
+
+		for (uint i = 0; i < directories.size(); i++)
+		{
+			std::string _P = this->path + std::string("/") + directories.at(i);
+			File* file = new File(directories.at(i).c_str());
+			file->path = _P;
+			this->children.push_back(file);
+			file->FolderFiles();
+		}
+	
+
+}
+
 std::string ModuleFileSystem::SetNormalName(const char* path) {
 
 	std::string name(path);

@@ -4,7 +4,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "ModuleImport.h"
-
+#include "ModuleFileSystem.h"
 #include "GameObject.h"
 
 struct jsonGameObject {
@@ -36,6 +36,7 @@ public:
 	GameObject* camera;
 	GameObject* street;
 	const char* fileName = "test.json";
+	File* assets;
 
 private:
 	void writeChildren(JSONWriter& writer, std::vector<GameObject*> children);

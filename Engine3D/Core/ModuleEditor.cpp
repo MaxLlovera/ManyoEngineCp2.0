@@ -536,8 +536,24 @@ void ModuleEditor::UpdateWindowStatus() {
     if (showExplorer) {
 
         ImGui::Begin("Explorer", &showExplorer);
-      
+        std::stack<File*> explorer;
+        explorer.push(App->scene->assets);
+        while (!explorer.empty())
+        {
+            File* go = explorer.top();
+            explorer.pop();
 
+
+            if (ImGui::TreeNodeEx(go->name.c_str(), ImGuiTreeNodeFlags_Selected))
+            {
+                for (File* child : go->children)
+                {
+                    explorer.push(child);
+                }
+                ImGui::TreePop();
+            }
+        }
+       
         ImGui::End();
 
     }

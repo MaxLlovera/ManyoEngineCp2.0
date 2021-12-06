@@ -14,6 +14,22 @@ struct aiFileIO;
 class Config;
 struct PathNode;
 
+class File
+{
+public:
+	File(const std::string name) : name(name) {}
+
+
+	void FolderFiles();
+public:
+	std::string name;
+	std::string path;
+
+	std::vector<File*> children;
+	std::vector<std::string> files;
+
+
+};
 class ModuleFileSystem : public Module
 {
 public:

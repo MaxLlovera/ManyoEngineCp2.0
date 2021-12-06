@@ -70,6 +70,7 @@ public:
 
 	bool active = true;
 	bool isSelected = false;
+	bool drawABB = true;
 
 };
 

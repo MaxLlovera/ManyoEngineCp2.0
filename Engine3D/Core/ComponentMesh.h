@@ -56,6 +56,7 @@ public:
 	bool drawWireframe = false;
 	bool drawVertexNormals = false;
 	bool drawFaceNormals = false;
+
 	float normalScale = 1.f;
 	float3 initialrotation = float3(90, 0, 0);
 public:

@@ -122,8 +122,8 @@ void GameObject::GenerateGlobalAABB(ComponentMesh* mesh)
 	// Generate global AABB
 	aabb.SetNegativeInfinity();
 	aabb.Enclose(oobb);
-
-	DrawAABB();
+	if(drawABB) DrawAABB();
+	
 }
 
 void GameObject::DrawAABB()

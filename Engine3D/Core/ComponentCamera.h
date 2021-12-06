@@ -47,5 +47,5 @@ public:
 public:
 	Frustum frustum;
 	float lastDeltaX = 0.f, lastDeltaY = 0.f;
-	bool drawFrustum = false;
+	bool drawFrustum = true;
 };

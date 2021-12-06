@@ -18,13 +18,9 @@ ComponentCamera::ComponentCamera(GameObject* parent) : Component(parent)
 	frustum.farPlaneDistance = farPlaneDistance;
 	frustum.nearPlaneDistance = nearPlaneDistance;
 
-	//frustum.front = owner->transform->GetForward();
-	//frustum.up = owner->transform->GetUp();
-
 	frustum.front = float3(0.0f, 0.0f, 1.0f);
 	frustum.up = float3(0.0f, 1.0f, 0.0f);
 	
-
 	frustum.verticalFov = DEGTORAD * 60.0;
 	HorizontalFOV(frustum.verticalFov, 16.0f, 9.0f);
 	DrawFrustum();
@@ -111,8 +107,8 @@ void ComponentCamera::CalculateViewMatrix()
 void ComponentCamera::RecalculateProjection()
 {
 	frustum.type = FrustumType::PerspectiveFrustum;
-	//cameraFrustum.nearPlaneDistance = nearPlaneDistance;
-	//cameraFrustum.farPlaneDistance = farPlaneDistance;
+	frustum.nearPlaneDistance = nearPlaneDistance;
+	frustum.farPlaneDistance = farPlaneDistance;
 	frustum.verticalFov = (verticalFOV * 3.141592 / 2) / 180.f;
 	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspectRatio);
 }

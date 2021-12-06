@@ -7,6 +7,8 @@
 #include "Geometry/AABB.h"
 #include "par_shapes.h"
 
+class GameObject;
+
 class ComponentMesh : public Component {
 
 public:
@@ -23,7 +25,7 @@ public:
 	~ComponentMesh();
 
 	void CopyParMesh(par_shapes_mesh* parMesh);
-
+	bool Start();
 	void GenerateBuffers();
 	void ComputeNormals();
 	void GenerateBounds();

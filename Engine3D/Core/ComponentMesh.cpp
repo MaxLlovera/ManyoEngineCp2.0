@@ -1,5 +1,4 @@
 #include "ComponentMesh.h"
-
 #include "glew.h"
 #include "SDL/include/SDL_opengl.h"
 #include "Application.h"
@@ -10,7 +9,8 @@
 #include "ImGui/imgui.h"
 #include "Geometry/Sphere.h"
 #include "par_shapes.h"
-
+#include "ModuleImport.h"
+#include "ModuleScene.h"
 
 ComponentMesh::ComponentMesh(GameObject* parent) : Component(parent) 
 {
@@ -41,6 +41,16 @@ ComponentMesh::~ComponentMesh()
 	vertexBufferId ? glDeleteBuffers(1, &vertexBufferId) : 0;
 	textureBufferId ? glDeleteBuffers(1, &textureBufferId) : 0;
 	indexBufferId ? glDeleteBuffers(1, &indexBufferId) : 0;
+}
+
+bool ComponentMesh::Start()
+{
+	GameObject* newGameObject = App->scene->street;
+	App->import->LoadGeometry("Assets/Models/street2.fbx", newGameObject);
+
+	bool ret = true;
+
+	return ret;
 }
 
 void ComponentMesh::CopyParMesh(par_shapes_mesh* parMesh)

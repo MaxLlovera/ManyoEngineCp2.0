@@ -24,7 +24,7 @@ ComponentCamera::ComponentCamera(GameObject* parent) : Component(parent)
 
 	frustum.verticalFov = DEGTORAD * 60.0;
 	HorizontalFOV(frustum.verticalFov, 16.0f, 9.0f);
-	//DrawFrustum();
+	DrawFrustum();
 	componentType = COMPONENT_TYPE::CAMERA;
 }
 
@@ -158,10 +158,17 @@ void ComponentCamera::OnGui()
 {
 	if (ImGui::CollapsingHeader("Camera"))
 	{
-		ImGui::DragFloat("Near Plane", &frustum.nearPlaneDistance);
-		ImGui::DragFloat("Far Plane", &frustum.farPlaneDistance);
+		if (ImGui::DragFloat("Near Plane", &frustum.nearPlaneDistance))
+		{
+			projectionIsDirty = true;
+		}
+		if (ImGui::DragFloat("Far Plane", &frustum.farPlaneDistance))
+		{
+			projectionIsDirty = true;
+		}
 		if (ImGui::DragFloat("FOV", &frustum.horizontalFov))
 		{
+			projectionIsDirty = true;
 			RecalculateProjection();
 		}
 	}

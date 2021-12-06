@@ -34,6 +34,7 @@ public:
 
 	GameObject* root;
 	GameObject* camera;
+	GameObject* street;
 	const char* fileName = "test.json";
 
 private:

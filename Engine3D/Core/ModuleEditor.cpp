@@ -41,7 +41,7 @@ ModuleEditor::ModuleEditor(Application* app, bool start_enabled) : Module(app, s
     showGameWindow = true;
     showSceneWindow = true;
     showTextures = true;
-
+    showExplorer = true;
     currentColor = { 1.0f, 1.0f, 1.0f, 1.0f };
     
     gameobjectSelected = nullptr;

@@ -46,6 +46,8 @@ ComponentMesh::~ComponentMesh()
 bool ComponentMesh::Start()
 {
 	GameObject* newGameObject = App->scene->street;
+	newGameObject->transform->rotationEuler = initialrotation;
+	newGameObject->transform->GetRotation();
 	App->import->LoadGeometry("Assets/Models/street2.fbx", newGameObject);
 
 	bool ret = true;

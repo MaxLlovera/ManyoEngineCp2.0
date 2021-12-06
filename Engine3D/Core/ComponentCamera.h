@@ -43,6 +43,7 @@ public:
 	float cameraSensitivity = .5f;
 	float cameraSpeed = 60.f;
 	bool projectionIsDirty = false;
+	float3 initialPos = float3(0.f, 0.f, -150.f);
 public:
 	Frustum frustum;
 	float lastDeltaX = 0.f, lastDeltaY = 0.f;

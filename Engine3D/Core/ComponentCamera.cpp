@@ -18,9 +18,12 @@ ComponentCamera::ComponentCamera(GameObject* parent) : Component(parent)
 	frustum.farPlaneDistance = farPlaneDistance;
 	frustum.nearPlaneDistance = nearPlaneDistance;
 
+	//frustum.front = owner->transform->GetForward();
+	//frustum.up = owner->transform->GetUp();
+
 	frustum.front = float3(0.0f, 0.0f, 1.0f);
 	frustum.up = float3(0.0f, 1.0f, 0.0f);
-	//frustum.pos = float3(0.0f, 5.0f, 5.0f);
+	
 
 	frustum.verticalFov = DEGTORAD * 60.0;
 	HorizontalFOV(frustum.verticalFov, 16.0f, 9.0f);
@@ -38,7 +41,8 @@ bool ComponentCamera::Start()
 	LOG("Setting up the camera");
 
 	LookAt(float3::zero);
-
+	owner->transform->position = initialPos;
+	frustum.pos = owner->transform->GetPosition();
 	bool ret = true;
 
 	return ret;
@@ -46,6 +50,11 @@ bool ComponentCamera::Start()
 
 bool ComponentCamera::Update(float dt)
 {
+	frustum.pos = owner->transform->GetPosition();
+	frustum.front = owner->transform->GetForward();
+	frustum.up = owner->transform->GetUp();
+	viewMatrix = frustum.ViewMatrix();
+
 	bool ret = true;
 
 	return ret;
@@ -68,13 +77,11 @@ bool ComponentCamera::PreUpdate(float dt)
 void ComponentCamera::LookAt(const float3& point)
 {
 	reference = point;
-
 	frustum.front = (reference - frustum.pos).Normalized();
 	right = float3(0.0f, 1.0f, 0.0f).Cross(frustum.front).Normalized();
 	frustum.up = front.Cross(right);
-
-
 }
+
 void ComponentCamera::HorizontalFOV(float vFOV, float width, float height)
 {
 	frustum.horizontalFov = 2.0f * atan((tan(vFOV/2)) * (width / height));
@@ -103,11 +110,11 @@ void ComponentCamera::CalculateViewMatrix()
 
 void ComponentCamera::RecalculateProjection()
 {
-	cameraFrustum.type = FrustumType::PerspectiveFrustum;
-	cameraFrustum.nearPlaneDistance = nearPlaneDistance;
-	cameraFrustum.farPlaneDistance = farPlaneDistance;
-	cameraFrustum.verticalFov = (verticalFOV * 3.141592 / 2) / 180.f;
-	cameraFrustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspectRatio);
+	frustum.type = FrustumType::PerspectiveFrustum;
+	//cameraFrustum.nearPlaneDistance = nearPlaneDistance;
+	//cameraFrustum.farPlaneDistance = farPlaneDistance;
+	frustum.verticalFov = (verticalFOV * 3.141592 / 2) / 180.f;
+	frustum.horizontalFov = 2.f * atanf(tanf(frustum.verticalFov * 0.5f) * aspectRatio);
 }
 
 void ComponentCamera::DrawFrustum()
@@ -166,7 +173,7 @@ void ComponentCamera::OnGui()
 		{
 			projectionIsDirty = true;
 		}
-		if (ImGui::DragFloat("FOV", &frustum.horizontalFov))
+		if (ImGui::DragFloat("FOV", &verticalFOV))
 		{
 			projectionIsDirty = true;
 			RecalculateProjection();

@@ -38,6 +38,8 @@ bool ModuleScene::Start()
 	street = CreateGameObject("Street", root);
 	street->CreateComponent<ComponentMesh>();
 	street->GetComponent<ComponentMesh>()->Start();
+
+	
 	//Loading house and textures since beginning
 	//App->import->LoadGeometry("Assets/Models/street2.fbx", street);
 	loadScene();
